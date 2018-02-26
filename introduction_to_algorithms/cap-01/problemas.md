@@ -6,13 +6,13 @@ solve the problem takes _f(n)_ microsseconds.
 
 |                 | 1 second | 1 minute | 1 hour | 1 day | 1 month | 1 year | 1 century |
 |-----------------|:--------:|:--------:|:------:|:-----:|:-------:|:------:|:---------:|
-| ![](imagens/logn.png)   |          |          |        |       |         |        |           |
-| [$]\sqrt{n}[/$] |          |          |        |       |         |        |           |
-| [$]n[/$]        |          |          |        |       |         |        |           |
-| [$]n lg n[/$]   |          |          |        |       |         |        |           |
-| [$]n^2[/$]      |          |          |        |       |         |        |           |
-| [$]n^3[/$]      |          |          |        |       |         |        |           |
-| [$]2^n[/$]      |          |          |        |       |         |        |           |
-| [$]n![/$]       |          |          |        |       |         |        |           |
+| ![](imagens/logn.png) |          |          |        |       |         |        |           |
+| ![](imagens/raizn.png) |          |          |        |       |         |        |           |
+| ![](imagens/n.png) |          |          |        |       |         |        |           |
+| ![](imagens/nlogn.png) |          |          |        |       |         |        |           |
+| ![](imagens/n2.png) |          |          |        |       |         |        |           |
+| ![](imagens/n3.png) |          |          |        |       |         |        |           |
+| ![](imagens/2n.png) |          |          |        |       |         |        |           |
+| ![](imagens/nfat.png) |          |          |        |       |         |        |           |
 
 ## Reposta
