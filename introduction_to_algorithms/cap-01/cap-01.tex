@@ -114,6 +114,8 @@
 \usepackage{array}
 \usepackage{colortbl}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%\newcolumntype{ML}[1]{>{$}l<{$}}
+%\newcolumntype{MR}[1]{>{R}r<{R}}
 \newcolumntype{L}[1]{>{\arraybackslash}m{#1}}
 \newcolumntype{N}{@{}m{0pt}@{}}
 
@@ -434,13 +436,45 @@ rápido do que outro algoritmo com tempo de execução $2^n$ na mesma máquina,
 \label{problemas}
 %\thispagestyle{plain}
 
-aqui
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Por que comprar a HP-12C, a ``calculadora que não morre''?}
-\label{por-que-comprar}
+\subsection{Problema 1.1}
+\label{problema_1_1}
 
-çlkasdjçalksdjfçalskdfj
+\begin{table}[H]
+\centering
+\caption{Maior $n$ inteiro que pode ser resolvido em um tempo $t$, quando o problema demora $f(n)$ microssegundos} \label{tab:maior-n}
+\footnotesize
+\begin{tabular}{|c|r|r|r|r|r|r|r|}
+  \hline
+  & \unidade{1}{s} & \unidade{1}{m} & \unidade{1}{h} & \unidade{1}{d} & \unidado{1}{mês} & \unidade{1}{ano} & \unidado{1}{séc.}\\ \hline
+  $\lg n$ & $2^{10^6}$ & $2^{6.0 \times 10^7}$ & $2^{3.6 \times 10^9}$ & $2^{8.64 \times 10^{10}}$ & $2^{2.592 \times 10^{12}}$ & $2^{3.1536 \times 10^{13}}$ & $2^{3.1536 \times 10^{15}}$ \\ \hline
+  $\sqrt{n}$ & $10^{12}$ & $3.6 \times 10^{15}$ & $1.296 \times 10^{19}$ & $7.465 \times 10^{21}$ & $6.7185 \times 10^{24}$ & $9.9452 \times 10^{26}$ & $9.9452 \times 10^{30}$ \\ \hline
+  $n$        & $10^6$ & $6.0 \times 10^7$ & $3.6 \times 10^9$ & $8.64 \times 10^{10}$ & $2.592 \times 10^{12}$ & $3.1536 \times 10^{13}$ & $3.1536 \times 10^{15}$ \\ \hline
+  $n \lg n$ & & & & & & & \\ \hline
+  $n^2$ & $1000$ & $7745$ & $60000$ & $293938$ & $1609968$ & $5615692$ & $56175382$ \\ \hline
+  $n^3$ & $100$ & $391$ & $1532$ & $4420$ & $13736$ & $31593$ & $146677$ \\ \hline
+  $2^n$ & $19$ & $25$ & $31$ & $36$ & $41$ & $44$ & $51$ \\ \hline
+  $n!$ & & & & & & &\\ \hline
+\end{tabular}
+\end{table}
+
+Arrazoado:
+
+\begin{itemize}
+\item Sabendo que $f(n)$ demora $1\, \mu s$, então é fácil calcular o tempo para $n$:
+  basta um cálculo proporcional direto. Por exemplo: em 1 segundo temos 1.000.000 de
+  microssegundos, então o maior $n$ que pode ser calculado em 1 segundo é 1.000.000 ($10^6$).
+\item Se a função demorar $\sqrt{n}$ microssegundos, basta calcular a função inversa,
+  ou seja, $n^2$, para determinar qual o maior $n$.
+\item Quando a função demorar $\lg n$ (onde $\lg = \log_2$), o maior $n$ é dado
+  pela função inversa $2^n$.
+\item Quando a função demorar $n^2$, o maior $n$ é dado pela função inversa $\sqrt{n}$.
+\item Quando a função demorar $n^3$, o maior $n$ é dado pela função inversa $\sqrt[3]{n}$.
+\item Quando a função demorar $2^n$, o maior $n$ é dado pela função inversa $\lg n$.
+\item $n \lg n$ ??
+\item $n!$ ??
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
