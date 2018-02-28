@@ -4,7 +4,7 @@
 %
 % Abrantes Araújo Silva Filho
 % abrantesasf@gmail.com
-% 2016-10-12
+% 2018-02-25
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,8 +14,8 @@
   \documentclass[pdftex,a4paper,12pt,brazil]{article} % Se tem draft é rascunho
   %\usepackage{ae}
   \usepackage[pdftex]{geometry}
-  \usepackage[pdftex]{graphicx}
   \geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
+  \usepackage[pdftex]{graphicx}
   \usepackage{setspace}
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
@@ -65,10 +65,19 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Altera fonte padrão
+% phv=Helvetica ptm=Times ppl=Palatino pbk=bookman
+% pag=AdobeAvantGarde pnc=Adobe NewCenturySchoolbook
+\renewcommand{\familydefault}{ppl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Configura símbolos e bibliotecas matemáticas:
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{latexsym}
+\usepackage{array}
+\usepackage[ruled]{algorithm}
 %\usepackage{physics}
 \usepackage{siunitx}
 \sisetup{group-separator = {.}}
