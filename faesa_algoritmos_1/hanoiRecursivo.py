@@ -45,5 +45,5 @@ def hanoiRecursivo(n):
     recursivo(n, 'TORRE-1', 'TORRE-3', 'TORRE-2', contador = 0)
     
     print('Fim! Os ' + str(passos) + ' passos foram executados. Parabéns!')
-    
-Hanoi(7)
+
+hanoiRecursivo(7)
