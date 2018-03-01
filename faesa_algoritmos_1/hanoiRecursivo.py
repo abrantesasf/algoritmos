@@ -28,6 +28,7 @@ def hanoiRecursivo(n):
                        discussão no StackOverflow:
                        https://stackoverflow.com/questions/15052704/how-to-create-a-counter-inside-a-recursive-function
         Orientação: ---
+            GitHub: https://github.com/abrantesasf/algoritmos/tree/master/faesa_algoritmos_1
     """
     passos = 2**n -1
     print('Para ' + str(n) + ' discos, são mecessários ' + str(passos) + ' passos:')

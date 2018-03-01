@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb 27 23:34:35 2018
+Created on Thu Mar  1 13:35:32 2018
 @author: abrantesasf
 """
 
@@ -19,8 +19,9 @@ def hanoiIterativo(n):
         Limitações: não incluí checagens e validações
          Sugestões: Abrantes Araújo Silva Filho
                     abrantesasf@gmail.com
-       Referências: Atividade na aula do Prof. 
-        Orientação: ---
+       Referências: Atividade na aula do Prof. Howard Roatti
+        Orientação: Prof. Howard Roatti
+            GitHub: https://github.com/abrantesasf/algoritmos/tree/master/faesa_algoritmos_1
     """
     
     # Checa discos
@@ -31,21 +32,29 @@ def hanoiIterativo(n):
     
     # Qual o número mínimo de movimentos?
     passos = 2**n - 1
+    print('Para ' + str(n) + ' discos, são mecessários ' + str(passos) + ' passos:')
+    
+    # Seqüência desejada final:
+    listaDesejada = []
+    for i in range(n, 0, -1):
+        listaDesejada.append(i)
+    
+    # Listas para conter os discos
+    listaOrigem = []
+    listaDestino = []
+    listaAuxiliar = []
+    
+    # Inicia a torre de origem
+    listaOrigem = listaDesejada.copy()
     
     # Contador de passagens pelo loop (para poder determinar
     # a inversão correta das torres) e sequences de comparação:
     passagem = 1
     seq1 = range(1, passos, 3)
     seq2 = range(2, passos, 3)
-    tipoSeq = 0
 
     # Contador para impressão do número de cada etapa da solução
     contador = 1
-    
-    # Contadores para verificar quantos discos já estão em cada torre
-    discosOrigem = n
-    discosDestino = 0
-    discosAuxiliar = 0
     
     # Se n for ímpar:
     if n % 2 != 0:
@@ -53,147 +62,94 @@ def hanoiIterativo(n):
         # Inicia loop
         while contador <= passos:
             
-            # Determina ordem das torres
+            # Rearranjo da ordem das torres e das listas de discos
             if passagem in seq1:
-                tipoSeq  = 1
                 origem   = 'TORRE-1'
                 destino  = 'TORRE-3'
                 auxiliar = 'TORRE-2'
+                # Só rearranja a ordem se não é a primeira passagem pelo loop
                 if passagem > 1:
-                    temp = discosOrigem
-                    discosOrigem = discosDestino
-                    discosDestino = discosAuxiliar
-                    discosAuxiliar = temp
+                    temp = listaOrigem.copy()
+                    listaOrigem = listaDestino.copy()
+                    listaDestino = listaAuxiliar.copy()
+                    listaAuxiliar = temp.copy()
             elif passagem in seq2:
-                tipoSeq  = 2
                 origem   = 'TORRE-3'
                 destino  = 'TORRE-2'
-                auxiliar = 'TORRE-1'                
-                temp           = discosOrigem
-                discosOrigem   = discosDestino
-                discosDestino  = discosAuxiliar
-                discosAuxiliar = temp
+                auxiliar = 'TORRE-1'
+                temp = listaOrigem.copy()
+                listaOrigem = listaDestino.copy()
+                listaDestino = listaAuxiliar.copy()
+                listaAuxiliar = temp.copy()
             else:
-                tipoSeq  = 3
                 origem   = 'TORRE-2'
                 destino  = 'TORRE-1'
                 auxiliar = 'TORRE-3'
-                temp = discosOrigem
-                discosOrigem   = discosDestino
-                discosDestino  = discosAuxiliar
-                discosAuxiliar = temp
+                temp = listaOrigem.copy()
+                listaOrigem = listaDestino.copy()
+                listaDestino = listaAuxiliar.copy()
+                listaAuxiliar = temp.copy()
             
             # Inicia movimentos para n ímpar:
             print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
+            listaDestino.append(listaOrigem.pop())
             contador += 1
-            discosOrigem  -= 1
-            discosDestino += 1
             print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
+            listaAuxiliar.append(listaOrigem.pop())
             contador += 1
-            discosOrigem   -= 1
-            discosAuxiliar += 1
             print(str(contador) + ' -- da ' + destino + ' para a ' + auxiliar)
+            listaAuxiliar.append(listaDestino.pop())
             contador += 1
-            discosDestino  -= 1
-            discosAuxiliar += 1
             print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
+            listaDestino.append(listaOrigem.pop())
             contador += 1
-            discosOrigem  -= 1
-            discosDestino += 1
             print(str(contador) + ' -- da ' + auxiliar + ' para a ' + origem)
+            listaOrigem.append(listaAuxiliar.pop())
             contador += 1
-            discosAuxiliar -= 1
-            discosOrigem   += 1
             print(str(contador) + ' -- da ' + auxiliar + ' para a ' + destino)
+            listaDestino.append(listaAuxiliar.pop())
             contador += 1
-            discosAuxiliar -= 1
-            discosDestino  += 1
             print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
+            listaDestino.append(listaOrigem.pop())
             contador += 1
-            discosOrigem  -= 1
-            discosDestino += 1
             
-            # Verifica se todos os discos já estão no destino
-            if (n - discosDestino == 0):
+            # Acabou?
+            if listaDestino == listaDesejada:
                 return print('Fim! Os ' + str(passos) + ' passos foram executados. Parabéns!')
-            elif (n - discosDestino == 1) and (destino == 'TORRE-3'):
-                print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
+            # OK, não acabou. Então temos que verifidcar algumas coisas antes
+            # de decidir qual o próximo movimento antes do loop recomeçar.
+            # A listaAuxiliar está vazia?
+            elif (len(listaAuxiliar) == 0):
+                print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
+                listaAuxiliar.append(listaOrigem.pop())
                 contador += 1
-                discosDestino += 1
-                return print('Fim! Os ' + str(passos) + ' passos foram executados. Parabéns!')
-            else:
-                if tipoSeq == 1:
+            # Se a listaAuxiliar não está vazia, a listaOrigem está vazia?
+            elif (len(listaOrigem) == 0):
+                print(str(contador) + ' -- da ' + auxiliar + ' para a ' + origem)
+                listaOrigem.append(listaAuxiliar.pop())
+                contador += 1
+            # Se nem a listaAuxiliar nem a listaOrigem estiverem vaziar:
+            elif (len(listaAuxiliar) > 0) and (len(listaOrigem) > 0):
+                # O disco no topo da listaAuxiliar é maior do que o disco no
+                # topo da listaOrigem?
+                if (listaAuxiliar[-1] > listaOrigem[-1]):
                     print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
+                    listaAuxiliar.append(listaOrigem.pop())
                     contador += 1
-                    discosOrigem   -= 1
-                    discosAuxiliar += 1
-                elif tipoSeq == 2:
+                # O disco no topo da listaAuxiliar é menor do que o disco no
+                # topo da lista Origem:
+                else:
                     print(str(contador) + ' -- da ' + auxiliar + ' para a ' + origem)
+                    listaOrigem.append(listaAuxiliar.pop())
                     contador += 1
-                    discosAuxiliar -= 1
-                    discosOrigem += 1
-                elif tipoSeq == 3:
-                    print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
-                    contador += 1
-                    discosOrigem   -= 1
-                    discosAuxiliar += 1
-                
-            # Incrementa a passagem
+            
+            # Incrementa a passagem para reordenar as torres/listas
             passagem += 1
-                
-#                
-#            if contador < passos:
-#                origem   = 'TORRE-3'
-#                destino  = 'TORRE-2'
-#                auxiliar = 'TORRE-1'
-#                print(str(contador) + ' -- da ' + auxiliar + ' para a ' + destino)
-#                contador += 1
-#            
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + destino + ' para a ' + auxiliar)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + auxiliar + ' para a ' + origem)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + auxiliar + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#        if contador < passos:
-#            origem   = 'TORRE-2'
-#            destino  = 'TORRE-1'
-#            auxiliar = 'TORRE-3'
-#            print(str(contador) + ' -- da ' + destino + ' para a ' + auxiliar)
-#            contador += 1
-#            
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + auxiliar)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + destino + ' para a ' + auxiliar)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + auxiliar + ' para a ' + origem)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + auxiliar + ' para a ' + destino)
-#            contador += 1
-#            print(str(contador) + ' -- da ' + origem + ' para a ' + destino)
-#            contador += 1
-#        if contador < passos:
-#            origem   = 'TORRE-1'
-#            destino  = 'TORRE-3'
-#            auxiliar = 'TORRE-2'
-#            print(str(contador) + ' -- da ' + auxiliar + ' para a ' + destino)
-#            contador += 1
-#                    
-#    print('Fim! Os ' + str(passos) + ' passos foram executados. Parabéns!')
+            
+            # AQUI REINICIA O LOOP!!!!!
+            
+    # Se n for par:    
+    else:
+        return print('DESCULPE! Ainda não implementado para n = par. Use n = ímpar.')
 
 hanoiIterativo(7)
-
-for i in range(1, 100, 3):
-    print(i)
