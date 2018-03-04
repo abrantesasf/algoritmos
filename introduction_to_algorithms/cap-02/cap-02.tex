@@ -84,6 +84,23 @@
 \sisetup{group-digits = {false}}
 \sisetup{output-decimal-marker = {,}}
 
+\usepackage{listings}
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Configura fontes e outros símbolos
@@ -285,7 +302,7 @@
 %%% Determina forma de hifenização de palavras quando a hifenização
 %%% padrão não estiver correta
 %\hyphenation{ne-nhu-ma}
-\babelhyphenation[brazil]{ne-nhu-ma}
+\babelhyphenation[brazil]{ne-nhu-ma Git-Hub}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -333,8 +350,9 @@ ESTE DOCUMENTO É FORNECIDO ``NO ESTADO EM QUE SE ENCONTRA'', SEM GARANTIAS DE Q
 NATUREZA, EXPRESSAS OU IMPLÍCITAS. EM NENHU\-MA HIPÓTESE O AUTOR PODERÁ SER RESPONSABILIZADO POR
 QUALQUER RECLAMAÇÃO, DANOS OU OUTROS PROBLEMAS DECORRENTES DO USO DESTE CONTEÚDO.
 
-Este documento (em formato PDF) e o original em \LaTeX\ estão disponíveis no seguinte
-repositório GitHub: \url{https://github.com/abrantesasf/algoritmos}
+Este documento (em formato PDF), o original em \LaTeX, e códigos dos exercícios
+estão disponíveis no seguinte
+repositório GitHub: \url{https://github.com/abrantesasf/algoritmos/tree/master/introduction_to_algorithms/cap-02}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -352,8 +370,70 @@ repositório GitHub: \url{https://github.com/abrantesasf/algoritmos}
 \subsection{Grupo 2.1:}
 \label{grupo_2_1}
 
-\paragraph{Exercício 2.1-1}
+\paragraph{Exercício 2.1-1} A ilustração do Insertion Sort para o array [31, 41, 59, 26, 41, 58] é:
 
+\begin{figure}[H]
+\begin{center}
+  \caption{Ilustração do Insertion Sort} \label{fig:insertion_sort}
+  \includegraphics[scale=0.3]{ex-2-1-1.png}\\
+  %\footnotesize
+  %\vspace{0.10cm}
+  %(rodapé da ilustração)
+\end{center}
+\end{figure}
+
+\newpage
+
+\paragraph{Exercício 2.1-2} Insertion Sort em ordem decrescente (código
+completo no repositório GitHub):
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]
+def insertionSort(l):
+    for j in range(1, len(l)):
+        atual = l[j]
+        i = j - 1
+
+        while i >= 0 and l[i] < atual:
+            l[i + 1] = l[i]
+            i = i - 1
+
+        l[i + 1] = atual
+
+    return print(l)
+\end{lstlisting}
+
+\paragraph{Exercício 2.1-3} Busca linear pelo índice onde um número se encontra
+em uma lista (código completo no repositório GitHub):
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]
+def buscaNumero(l, n):
+    for i in range(0, len(l)):
+        if l[i] == n:
+            return print(i)
+    return None
+\end{lstlisting}
+
+Pelo conceito de \emph{loop invariant}, sabemos que a cada iteração de um loop for,
+o subarray considerado consiste em todos os elementos originalmente no subarray,
+mas ordenados. Assim, no exemplo acima, temos que checar 3 situações:
+
+\begin{itemize}
+\item INICIALIZAÇÃO: o \emph{loop invariant} é verdadeiro ANTES da primeira iteração
+  loop? Sim, logo após a alocação inicial do primeiro índice do contador (0), e antes
+  da checagem do primeiro teste do loop, o \emph{loop invariant} é verdadeiro.
+\item MANUTENÇÃO: o \emph{loop invariant} é verdadeiro a CADA ITERAÇÃO do loop?
+  Sim, a cada iteração o subarray l[i] consiste do mesmo elemento l[i], trivialmente
+  ordenado.
+\item TÉRMINO: o \emph{loop invariant} é verdadeiro APÓS o término do loop? Sim,
+  pois após o término do loop temos todos os elementos originais.
+\end{itemize}
+
+Portanto, podemos afirmar que o algoritmo acima para a busca linear do índice
+da localização de um número está correto.
+
+\paragraph{Exercício 2.1-4}
+
+???
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Grupo 2.2:}
@@ -384,6 +464,14 @@ repositório GitHub: \url{https://github.com/abrantesasf/algoritmos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Problema 2.1}
 \label{problema_2_1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problema 2.2}
+\label{problema_2_2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problema 2.3}
+\label{problema_2_3}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
