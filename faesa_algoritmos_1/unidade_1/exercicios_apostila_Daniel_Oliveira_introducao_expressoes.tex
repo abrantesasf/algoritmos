@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Arquivo LaTeX geral para a classe Article
-% Uso específico: exercícios sobre algoritmos
+% Uso específico: exercícios sobre expressões
 %
 % Abrantes Araújo Silva Filho
 % abrantesasf@gmail.com
@@ -375,18 +375,18 @@ repositório GitHub: \url{https://github.com/abrantesasf/algoritmos}
 
 \paragraph{a)}
 
-$$ae + \frac{b^{(3x)}}{c^2} = \verb|a*e + (b^(3*x))/c^2|$$
+$$ae + \frac{b^{(3x)}}{c^2} = \verb|a*e + (b^(3*x)/c^2)|$$
 
-\paragraph{b)} $$\frac{2x^2 - (3x)^{(x + 1)}}{2} + \frac{\sqrt{x + 1}}{x^2} =
-\verb!((2*x^2 - (3*x)^(x + 1))/2) + ((\sqrt{x + 1})/x^2)!$$
+\paragraph{b)} $$\frac{2x^2 - (3x)^{(x + 1)}}{2} + \frac{sqrt{x + 1}}{x^2} =
+\verb!((2*x^2 - (3*x)^(x + 1))/2) + ((sqrt(x + 1))/x^2)!$$
 
-\paragraph{c)} $$2h - \left(\frac{45}{3x}-4h(3-h)\right)^{22k} = \verb!2*h - ((45/(3*x) - 4*h*(3 - h))^(22*k)!$$
+\paragraph{c)} $$2h - \left(\frac{45}{3x}-4h(3-h)\right)^{22k} = \verb!2*h - ((45/(3*x)) - 4*h*(3 - h))^(22*k)!$$
 
-\paragraph{d)} $$\frac{\sqrt{2b-4a^2} + 2f^{-3}}{3-2a} = \verb!(\sqrt{2*b-4*a^2}+2*f^(-3))/(3-2*a)!$$
+\paragraph{d)} $$\frac{\sqrt{2b-4a^2} + 2f^{-3}}{3-2a} = \verb!(sqrt(2*b - 4*a^2) + 2*f^(-3))/(3 - 2*a)!$$
 
-\paragraph{e)} $$ \frac{\sqrt{-6^x + (2y)^{\frac{1}{3}}}}{3^9} = \verb!(\sqrt{-6^x + (2*y)^(1/3)})/3^9!$$
+\paragraph{e)} $$ \frac{\sqrt{-6^x + (2y)^{\frac{1}{3}}}}{3^9} = \verb!(sqrt(-6^x + (2*y)^(1/3)))/3^9!$$
 
-\paragraph{f)} $$\sqrt{\frac{2x + u^{\frac{2}{3}}}{a + bc}} = \verb!\sqrt{(2*x + u^(2/3))/(a+b*c)}!$$
+\paragraph{f)} $$\sqrt{\frac{2x + u^{\frac{2}{3}}}{a + bc}} = \verb!sqrt((2*x + u^(2/3))/(a+b*c))!$$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -394,7 +394,7 @@ $$ae + \frac{b^{(3x)}}{c^2} = \verb|a*e + (b^(3*x))/c^2|$$
 \subsection{Exercício 2: escreva as expressões em formato tradicional}
 \label{grupo_2}
 
-\paragraph{a)} $$\verb!a+b+(34+exp(e,9))/u-89^(1/2)! = a + b + \frac{34+e^9}{u-89^{\frac{1}{2}}}$$
+\paragraph{a)} $$\verb!a+b+(34+exp(e,9))/u-89^(1/2)! = a + b + \frac{34+e^9}{u} - 89^{\frac{1}{2}}$$
 
 \paragraph{b)} $$\verb!23+5/((7*a)/47)^(2/x)! = 23 + \frac{5}{\left(\frac{7a}{47}\right)^{\frac{2}{x}}} $$
 
@@ -406,7 +406,16 @@ $$ae + \frac{b^{(3x)}}{c^2} = \verb|a*e + (b^(3*x))/c^2|$$
 \subsection{Exercício 3: resolva as expressões lógicas}
 \label{grupo_3}
 
-\paragraph{a)} não (2\verb!^!3 < $\sqrt{16}$ ou 15/2 < 10) = F
+Atenção: nos exercícios a seguir a apostila é ambígua em relação aos operadores ``\verb!\!" e
+``\%''. Considerei portanto o seguinte:
+
+\begin{itemize}
+\item \verb!\! corresponde ao operador divisão inteira, definido como $a\verb!\!b \equiv \left \lfloor{a/b}\right \rfloor$
+  (sendo $\lfloor{x}\rfloor$ a função floor).
+  \item \% corresponde ao resto da divisão.
+\end{itemize}
+
+\paragraph{a)} Não (2\verb!^!3 < $\sqrt{16}$ ou 15\verb!\!2 < 10) = F
 
 \paragraph{b)} (6<8) ou (3>7) = V
 
@@ -416,11 +425,11 @@ $$ae + \frac{b^{(3x)}}{c^2} = \verb|a*e + (b^(3*x))/c^2|$$
 
 \paragraph{e)} Sabendo-se que U = 39: (34>9 e 5+u = 34) ou (5=15/3 e 8>12) = V
 
-\paragraph{f)} 10\%4 < 16\%3 = V
+\paragraph{f)} 10\%4 < 16\%3 = F
 
-\paragraph{g)} 2+8\%7 >= 6- (8\verb!^!(2/3))\verb!^!(1/2) = V
+\paragraph{g)} 2+8\%7 >= 6- (8\verb!^!(2/3))\verb!^!(1/2) = F
 
-\paragraph{h)} 15/7 >= 27 \% 5 = V
+\paragraph{h)} 15\verb!\!7 >= 27 \% 5 = V
 
 
 
