@@ -55,11 +55,11 @@ public class Calculadora {
 		
 		// Imprime resultados
 		System.out.printf("\nVocê entrou com os números: %.2f e %.2f.%n", a, b);
-		System.out.printf("\nA soma é %.2f%n", soma);
-		System.out.printf("A subtração é %.2f%n", subt);
-		System.out.printf("A multiplicação é %.2f%n", mult);
+		System.out.printf("\n         A soma de %.2f e %.2f é igual a: %.2f%n", a, b, soma);
+		System.out.printf("    A subtração de %.2f e %.2f é igual a: %.2f%n", a, b, subt);
+		System.out.printf("A multiplicação de %.2f e %.2f é igual a: %.2f%n", a, b, mult);
 		if (b != 0) {
-			System.out.printf("A divisão é %.2f%n", divi);
+			System.out.printf("      A divisão de %.2f e %.2f é igual a: %.2f%n", a, b, divi);
 		}
 		else {
 			System.out.printf("Não há divisão pois o divisor é 0.");
