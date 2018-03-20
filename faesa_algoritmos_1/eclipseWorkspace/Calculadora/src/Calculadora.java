@@ -15,7 +15,7 @@ public class Calculadora {
 		boolean ok = true;
 		while (ok) {
 			try {
-				System.out.print("Entre com o PRIMEIRO número: ");
+				System.out.print("\nEntre com o PRIMEIRO número: ");
 				a = scan.nextDouble();
 				ok = false;
 			}
@@ -30,7 +30,7 @@ public class Calculadora {
 		ok = true;
 		while (ok) {
 			try {
-				System.out.print("Entre com o SEGUNDO número: ");
+				System.out.print("\nEntre com o SEGUNDO número: ");
 				b = scan.nextDouble();
 				ok = false;
 			}
@@ -55,7 +55,7 @@ public class Calculadora {
 		
 		// Imprime resultados
 		System.out.printf("\nVocê entrou com os números: %.2f e %.2f.%n", a, b);
-		System.out.printf("A soma é %.2f%n", soma);
+		System.out.printf("\nA soma é %.2f%n", soma);
 		System.out.printf("A subtração é %.2f%n", subt);
 		System.out.printf("A multiplicação é %.2f%n", mult);
 		if (b != 0) {
@@ -64,7 +64,7 @@ public class Calculadora {
 		else {
 			System.out.printf("Não há divisão pois o divisor é 0.");
 		}
-		System.out.println("Moriturus te Saluto!");
+		System.out.println("\n--> Moriturus te Saluto! <--\n");
 
 	}
 
