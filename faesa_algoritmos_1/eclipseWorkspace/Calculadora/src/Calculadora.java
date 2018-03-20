@@ -64,7 +64,7 @@ public class Calculadora {
 		else {
 			System.out.printf("Não há divisão pois o divisor é 0.");
 		}
-		System.out.println("\n--> Moriturus te Saluto! <--\n");
+		System.out.println("\n--> Moriturus te saluto. <--\n");
 
 	}
 
