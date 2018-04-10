@@ -8,10 +8,13 @@ public class Exercicio02_1 {
 		// Declara Scanner
 		Scanner scan = new Scanner(System.in);
 		
-		// Variáveis para receber os números
+		// Variáveis para receber as notas e pesos:
 		double n1 = 0;
 		double n2 = 0;
 		double n3 = 0;
+		double p1 = 2;
+		double p2 = 3;
+		double p3 = 5;
 		
 		// Pega o primeiro número:
 		boolean ok = true;
@@ -62,11 +65,11 @@ public class Exercicio02_1 {
 		scan.close();
 		
 		// Calcula média
-		double ponderada = (n1 * 2 + n2 * 3 + n3 * 5)/(2+3+5);
+		double ponderada = (n1*p1 + n2*p2 + n3*p3)/(p1+p2+p3);
 		
 		// Imprime resultado:
-		System.out.printf("\nSuas notas foram %.2f, %.2f e %.2f. Sua média final foi de %.2f", n1, n2, n3, ponderada);
-		System.out.println("\n\nMoriturus te saluto.");
+		System.out.printf("\nSuas notas foram %.2f, %.2f e %.2f. Sua média final foi de %.2f!", n1, n2, n3, ponderada);
+		System.out.println("\n\nMoriturus te saluto.\n");
 
 	} // fecha public static void main
 
