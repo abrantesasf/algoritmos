@@ -1,8 +1,6 @@
 // Importa Scanner
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 public class Exercicio16 {
 
 	public static void main(String[] args) {
@@ -64,6 +62,9 @@ public class Exercicio16 {
 				ok = true;
 			}
 		}
+		
+		// Fecha scanner
+		scan.close();
 		
 		// Processamento
 		delta = Math.pow(numB, 2) - 4 * numA * numC;
