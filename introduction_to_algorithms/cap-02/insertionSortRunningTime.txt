@@ -1,0 +1,16 @@
+Algoritmo                            cost	times
+
+for j in range(1, len(l)):           c1		n       (começa do segundo elemento)
+   atual = lj]                       c2         n - 1
+   i = j - 1                         c3         n - 1
+
+   while i >= 0 and l[i] > atual:    c4         sum_2^n t
+      l[i + 1] = li]                 c5         sum_2^n (t - 1)
+      i = i - 1                      c6         sum_2^n (t - 1)
+
+   l[i + 1] = atual                  c7         n - 1
+
+
+T(n) = c1n + c2(n-1)           + c3(n-1)
+           + c4(sum_2^n t)     + c5(sum_2^n (t-1))
+	   + c6(sum_2^n (t-1)) + c7(n-1)
