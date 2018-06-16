@@ -1,0 +1,61 @@
+package condominio;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class condominio {
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		char opçao;
+		String [] nomePredios;
+		String [] comodos = {"Quartos","Banheiros","Copas","Area de serviço"};
+		String nome;
+		int [][] comodosDoPredios;
+		boolean sair = true;
+		
+		
+		
+		
+        do {
+        	
+        
+			System.out.print("\n    Controle de Condomínios\n"
+					+ "\n\t 1) Pesquisar"
+					+ "\n\t 2) Mostrar"
+					+ "\n\t 3) Alterar dados"
+					+ "\n\t 4) Cadastrar"
+					+ "\n\t 5) Sair"
+					+ "\n\t\t Insira a opção desejada: ");
+			opçao = scan.nextLine().charAt(0);
+			switch(opçao) {
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+				System.out.print("Digite o nome no condomínio: ");
+				nome = scan.nextLine();
+				System.out.print("Digite quantos prédios existem no condomínio: ");
+				int numeropredio = scan.nextInt();
+				nomePredios = new String[numeropredio];
+				comodosDoPredios = new int[numeropredio][4];
+				
+			    
+				for(int i = 0;i<numeropredio;i++) {
+			    	System.out.print("Digite o nome do " + (i + 1) + "º prédio: ");
+			    	nomePredios [0]= scan.next();	
+			    	for(int j = 0;j<comodos.length;j++) {
+			    		System.out.print("Defina a quantidade de " + comodos[j] + ": ");
+			    		comodosDoPredios[i][j] = scan.nextInt();
+			    			
+			    	}
+			    }
+				break;
+			case '5':
+				sair=false;
+			}
+        }while(sair);
+        
+	}
+	
+}
