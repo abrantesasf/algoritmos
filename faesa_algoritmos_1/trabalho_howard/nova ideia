@@ -1,7 +1,7 @@
 package brendhom;
 import java.util.Scanner;
 
-public class condominio {
+public class brendhom {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -9,14 +9,14 @@ public class condominio {
         String [] comodos = {"Quartos","Banheiros","Copas","Area de serviço"};
         int [][] comodosDoPredios;
         String [] nomePredios;
-        boolean sair = false;
+        boolean sair = true;
         int numeropredio;
         String nome;
         char opçao;
         do {
             
             menu();
-		    opçao = scan.next().charAt(0);
+            opçao = scan.next().charAt(0);
 		
              switch(opçao) {
                     case '1':
@@ -42,18 +42,20 @@ public class condominio {
     			    			
                             }
                         }
+                        
                         break;
                     case '5':
                     	System.out.println("\n\t\t Encerrando o programa(...)");
-                        sair=true;
+                        sair=false;
                         break;
                     default:
                         System.out.println("\n\n\t\tDigite um número valido!");
-                       
+                          
                 }
-            
+           
          }while(sair);
-}
+	
+       }
                public static void menu() {
 		       System.out.print("\n       Controle de Condomínios\n\n"
 				+ "\n\t 1) Pesquisar"
