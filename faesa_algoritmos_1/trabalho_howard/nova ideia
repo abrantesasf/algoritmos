@@ -1,7 +1,4 @@
 package brendhom;
-
-
-
 import java.util.Scanner;
 
 public class condominio {
@@ -16,11 +13,10 @@ public class condominio {
         int numeropredio;
         String nome;
         int opçao;
-       
-       do {
-	     menu();
+      do {
+		 menu();
 	     opçao = scan.nextInt();
-            switch(opçao) {
+         switch(opçao) {
                 case 1:
                 case 2:
                 case 3:
