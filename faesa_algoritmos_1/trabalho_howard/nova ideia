@@ -6,8 +6,8 @@ public class brendhom {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        String [] comodos = {"Quartos","Banheiros","Copas","Area de serviço"};
-        int [][] comodosDoPredios;
+        String [] comodos = {"Quarto","Cozinha","Copa","Sala","Banheiro","Varanda","Area de serviço"};
+        int [][] comodosDoPredios = null;
         String [] nomePredios;
         boolean sair = true;
         int numeropredio;
@@ -16,53 +16,56 @@ public class brendhom {
         do {
             
             menu();
-            opçao = scan.next().charAt(0);
+	    opçao = scan.next().charAt(0);
 		
              switch(opçao) {
                     case '1':
+                    	  System.out.print("Informe o nome do condomínio: ");
+                          nome = scan.next();
+                          
+                          System.out.print("Digite quantos prédios existem no condomínio: ");
+                          numeropredio = scan.nextInt();
+                          
+                          nomePredios = new String[numeropredio];
+                          comodosDoPredios = new int[numeropredio][comodos.length];
+      				
+                          for(int i = 0;i<numeropredio;i++) {
+                              System.out.print("Digite o nome do " + (i + 1) + "º prédio: ");
+                              nomePredios [0]= scan.next();	
+      	
+                              for(int j = 0;j<comodos.length;j++) {
+                                  System.out.print("Defina a quantidade de " + comodos[j] + ": ");
+                                  comodosDoPredios[i][j] = scan.nextInt();
+                             }
+                          }
+                         break;
                     case '2':
+                    	System.out.print("\n");
+                    	for (int linha = 0; linha < comodos.length; linha++)  {  
+                    		System.out.print("\t"+comodos[linha]);
+                    	}
+                    	System.out.print("\n");
+                    	break;
+                    	
                     case '3':
                     case '4':
-                        System.out.print("Informe o nome do condomínio: ");
-                        nome = scan.next();
-                        
-                        System.out.print("Digite quantos prédios existem no condomínio: ");
-                        numeropredio = scan.nextInt();
-                        
-                        nomePredios = new String[numeropredio];
-                        comodosDoPredios = new int[numeropredio][comodos.length];
-    				
-                        for(int i = 0;i<numeropredio;i++) {
-                            System.out.print("Digite o nome do " + (i + 1) + "º prédio: ");
-                            nomePredios [0]= scan.next();	
-    	
-                            for(int j = 0;j<comodos.length;j++) {
-                                System.out.print("Defina a quantidade de " + comodos[j] + ": ");
-                                comodosDoPredios[i][j] = scan.nextInt();
-    			    			
-                            }
-                        }
-                        
-                        break;
                     case '5':
                     	System.out.println("\n\t\t Encerrando o programa(...)");
                         sair=false;
                         break;
                     default:
-                        System.out.println("\n\n\t\tDigite um número valido!");
-                          
+                    System.out.println("\n\n\t\tDigite um número valido!");
                 }
-           
-         }while(sair);
+          }while(sair);
 	
        }
                public static void menu() {
 		       System.out.print("\n       Controle de Condomínios\n\n"
-				+ "\n\t 1) Pesquisar"
+				+ "\n\t 1) Cadastrar"
 				+ "\n\t 2) Mostrar"
 				+ "\n\t 3) Alterar dados"
-				+ "\n\t 4) Cadastrar"
+				+ "\n\t 4) Pesquisar"
 				+ "\n\t 5) Sair"
-				+ "\n\t\t Insira a opção desejada: ");
+				+ "\n\n\t\t Insira a opção desejada: ");
      }
    }
