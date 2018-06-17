@@ -17,11 +17,10 @@ public class condominio {
         String nome;
         int opçao;
        
-	
-	do {
+       do {
 	     menu();
 	     opçao = scan.nextInt();
-             switch(opçao) {
+            switch(opçao) {
                 case 1:
                 case 2:
                 case 3:
@@ -47,19 +46,18 @@ public class condominio {
                     }
                     break;
                 case 5:
-		    System.out.println("Encerrando o programa(...)");
+                	System.out.println("\n\t\t Encerrando o programa(...)");
                     sair=false;
                     break;
                 default:
                     System.out.println("Digite um número valido!");
-                   
                     System.exit(0);
             }
          }while(sair);
 	
        }
                public static void menu() {
-		       System.out.print("\n    Controle de Condomínios\n\n"
+		       System.out.print("\n    Controle de Condomínios\n"
 				+ "\n\t 1) Pesquisar"
 				+ "\n\t 2) Mostrar"
 				+ "\n\t 3) Alterar dados"
