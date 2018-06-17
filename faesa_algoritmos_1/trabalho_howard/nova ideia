@@ -14,8 +14,8 @@ public class condominio {
         String nome;
         int opçao;
       do {
-		 menu();
-	     opçao = scan.nextInt();
+	 menu();
+	 opçao = scan.nextInt();
          switch(opçao) {
                 case 1:
                 case 2:
