@@ -58,7 +58,7 @@ public class condominio {
 	
        }
                public static void menu() {
-		       System.out.print("\n    Controle de Condomínios\n"
+		       System.out.print("\n    Controle de Condomínios\n\n"
 				+ "\n\t 1) Pesquisar"
 				+ "\n\t 2) Mostrar"
 				+ "\n\t 3) Alterar dados"
