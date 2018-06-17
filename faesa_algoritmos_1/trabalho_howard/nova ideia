@@ -21,10 +21,7 @@ public class condominio {
 	do {
 		 menu();
 	     opçao = scan.nextInt();
-            
-            
-                        
-            switch(opçao) {
+             switch(opçao) {
                 case 1:
                 case 2:
                 case 3:
