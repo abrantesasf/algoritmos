@@ -19,7 +19,7 @@ public class condominio {
        
 	
 	do {
-		 menu();
+	     menu();
 	     opçao = scan.nextInt();
              switch(opçao) {
                 case 1:
