@@ -9,51 +9,53 @@ public class condominio {
         String [] comodos = {"Quartos","Banheiros","Copas","Area de serviço"};
         int [][] comodosDoPredios;
         String [] nomePredios;
-        boolean sair = true;
+        boolean sair = false;
         int numeropredio;
         String nome;
-        int opçao;
-      do {
-	 menu();
-	 opçao = scan.nextInt();
-         switch(opçao) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    System.out.print("Informe o nome do condomínio: ");
-                    nome = scan.next();
-                    
-                    System.out.print("Digite quantos prédios existem no condomínio: ");
-                    numeropredio = scan.nextInt();
-                    
-                    nomePredios = new String[numeropredio];
-                    comodosDoPredios = new int[numeropredio][4];
-				
-                    for(int i = 0;i<numeropredio;i++) {
-                    System.out.print("Digite o nome do " + (i + 1) + "º prédio: ");
-                    nomePredios [0]= scan.next();	
-	
-                        for(int j = 0;j<comodos.length;j++) {
-                        System.out.print("Defina a quantidade de " + comodos[j] + ": ");
-                        comodosDoPredios[i][j] = scan.nextInt();
-			    			
+        char opçao;
+        do {
+            
+            menu();
+		    opçao = scan.next().charAt(0);
+		
+             switch(opçao) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                        System.out.print("Informe o nome do condomínio: ");
+                        nome = scan.next();
+                        
+                        System.out.print("Digite quantos prédios existem no condomínio: ");
+                        numeropredio = scan.nextInt();
+                        
+                        nomePredios = new String[numeropredio];
+                        comodosDoPredios = new int[numeropredio][comodos.length];
+    				
+                        for(int i = 0;i<numeropredio;i++) {
+                            System.out.print("Digite o nome do " + (i + 1) + "º prédio: ");
+                            nomePredios [0]= scan.next();	
+    	
+                            for(int j = 0;j<comodos.length;j++) {
+                                System.out.print("Defina a quantidade de " + comodos[j] + ": ");
+                                comodosDoPredios[i][j] = scan.nextInt();
+    			    			
+                            }
                         }
-                    }
-                    break;
-                case 5:
-                	System.out.println("\n\t\t Encerrando o programa(...)");
-                    sair=false;
-                    break;
-                default:
-                    System.out.println("Digite um número valido!");
-                    System.exit(0);
-            }
+                        break;
+                    case '5':
+                    	System.out.println("\n\t\t Encerrando o programa(...)");
+                        sair=true;
+                        break;
+                    default:
+                        System.out.println("\n\n\t\tDigite um número valido!");
+                       
+                }
+            
          }while(sair);
-	
-       }
+}
                public static void menu() {
-		       System.out.print("\n    Controle de Condomínios\n"
+		       System.out.print("\n       Controle de Condomínios\n\n"
 				+ "\n\t 1) Pesquisar"
 				+ "\n\t 2) Mostrar"
 				+ "\n\t 3) Alterar dados"
