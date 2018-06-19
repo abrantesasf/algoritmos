@@ -400,9 +400,23 @@ public class TF_C3 {
 	}
 	
 	// Cria método para esperar o ENTER do usuário para continuar:
+	//public static void esperar2() throws IOException {
+	//	System.out.print("\n\t  Pressione ENTER para continuar...");
+	//	System.in.read();
+	//}	
 	public static void esperar2() throws IOException {
-		System.out.print("\n\t  Pressione ENTER para continuar...");
-		System.in.read();
-	}	
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = true;
+		while (ok) {
+			System.out.print("\n\t  Pressione ENTER para continuar...");
+	 		String readString = scanner.nextLine();
+			if (readString.isEmpty()) {
+				//System.out.println("ENTER");
+				ok = false;
+			} else {
+				ok = true;
+			}
+		}
+	}
 	
 } // Fecha a classe TF_C3
