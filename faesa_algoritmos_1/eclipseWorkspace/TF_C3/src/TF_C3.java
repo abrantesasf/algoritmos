@@ -20,6 +20,7 @@ public class TF_C3 {
 		boolean sair1     = true;
 		boolean sair2     = true;
 		boolean ok        = true;
+		boolean condoOK   = false;
 		boolean dadosOK   = false;
 		int     numero    = 0;
 		char    opcao1    = ' ';
@@ -55,6 +56,7 @@ public class TF_C3 {
 				System.out.print("\n  Informe o nome do condomínio: ");
 				nome = scan.nextLine();
 				nomeDoCondominio = nome;
+				condoOK = true;
 				
 				// Ao terminar o cadastro, informa e aguardo o ENTER do usuário:
 				System.out.print("  Cadastro do condomínio realizado com sucesso!");
@@ -63,71 +65,77 @@ public class TF_C3 {
 			
 			// Cadastrar dados:
 			case '1':
-				// Pega a quantidade de prédios no condomínio:
-				ok = true;
-				while (ok) {
-					try {
-						System.out.print("\n  Quantos prédios existem no condomínio \"" + nomeDoCondominio + "\"?\n  Por favor, digite um número inteiro >= 1: ");
-						numero = scan.nextInt();
-						scan.nextLine();
-						if (numero >= 1) {
-							qtdDePrediosNoCondominio = numero;
-							ok = false;
-						} else {
-							System.out.println("\tERRO! A quantidade de prédios deve ser >= 1! Tente novamente...");
-							ok = true;
-						} // fecha if-else
-					} catch (Exception e) {
-						System.out.println("\tERRO! Você não digitou um número inteiro válido! Tente novamente...");
-						ok = true;
-						scan.next();
-					} // fecha try-catch
-				} // fecha while
-				
-				// Cria um vetor para armazenar os nomes dos prédios, conforme a
-				// quantidade de prédios no condomínio:
-				vet_nomeDosPredios = new String[qtdDePrediosNoCondominio];
-				
-				// Cria uma matriz para armazenar as informações dos cômodos de cada prédio,
-				// conforme a quantidade de prédios no condomínio: 
-				mat_comodosDosPredios = new int[qtdDePrediosNoCondominio][vet_tiposDeComodos.length];
-				
-				// Popula a matriz com as informações dos cômodos de cada prédio:
-				for (int i = 0; i < qtdDePrediosNoCondominio; i++) {
-					// Solicita o nome do prédio e armazena no vetor:
-					System.out.print("\n\tInforme o nome do " + (i + 1) + "º prédio: ");
-					//scan.nextLine();
-					nome = scan.nextLine();
-					vet_nomeDosPredios[i] = nome;
-					
-					// Para cada prédio, solicita a quantidade de cômodos e preenche a matriz:
-					for (int j = 0; j < vet_tiposDeComodos.length; j++) {
-						// Solicita a quantidade de cada tipo de cômodo:
-						ok = true;
-						while (ok) {
-							try {
-								System.out.print("\t\tInforme a quantidade de " + vet_tiposDeComodos[j] + ": ");
-								numero = scan.nextInt();
-								scan.nextLine();
-								if (numero >= 0) {
-									mat_comodosDosPredios[i][j] = numero;
-									ok = false;
-								} else {
-									System.out.print("\t\t\tERRO!A quantidade precisa ser >= 0! Informe novamente...\n");
-									ok = true;
-								} // fecha if-else
-							} catch (Exception e) {
-								System.out.print("\t\t\tERRO!Você não digitou um número válido! Informe novamente...\n");
+				if (!condoOK) {
+					System.out.print("\n  Por favor, cadastre o nome do condomínio (opção 0)\n  antes de cadastras as demais informações.");
+				} else {
+					// Pega a quantidade de prédios no condomínio:
+					ok = true;
+					while (ok) {
+						try {
+							System.out.print("\n  Quantos prédios existem no condomínio \"" + nomeDoCondominio + "\"?\n  Por favor, digite um número inteiro >= 1: ");
+							numero = scan.nextInt();
+							scan.nextLine();
+							if (numero >= 1) {
+								qtdDePrediosNoCondominio = numero;
+								ok = false;
+							} else {
+								System.out.println("\tERRO! A quantidade de prédios deve ser >= 1! Tente novamente...");
 								ok = true;
-								scan.next();
-							} // fecha try-catch
-						} // fecha while
-					} // fecha for interno
-				} // fecha for externo
-				
-				// Ao terminar o cadastro, informa e aguardo o ENTER do usuário:
-				dadosOK = true;
-				System.out.print("\n  Cadastro dos prédios e cômodos realizado com sucesso!");
+							} // fecha if-else
+						} catch (Exception e) {
+							System.out.println("\tERRO! Você não digitou um número inteiro válido! Tente novamente...");
+							ok = true;
+							scan.next();
+						} // fecha try-catch
+					} // fecha while
+					
+					// Cria um vetor para armazenar os nomes dos prédios, conforme a
+					// quantidade de prédios no condomínio:
+					vet_nomeDosPredios = new String[qtdDePrediosNoCondominio];
+					
+					// Cria uma matriz para armazenar as informações dos cômodos de cada prédio,
+					// conforme a quantidade de prédios no condomínio: 
+					mat_comodosDosPredios = new int[qtdDePrediosNoCondominio][vet_tiposDeComodos.length];
+					
+					// Popula a matriz com as informações dos cômodos de cada prédio:
+					for (int i = 0; i < qtdDePrediosNoCondominio; i++) {
+						// Solicita o nome do prédio e armazena no vetor:
+						System.out.print("\n\tInforme o nome do " + (i + 1) + "º prédio: ");
+						//scan.nextLine();
+						nome = scan.nextLine();
+						vet_nomeDosPredios[i] = nome;
+						
+						// Para cada prédio, solicita a quantidade de cômodos e preenche a matriz:
+						for (int j = 0; j < vet_tiposDeComodos.length; j++) {
+							// Solicita a quantidade de cada tipo de cômodo:
+							ok = true;
+							while (ok) {
+								try {
+									System.out.print("\t\tInforme a quantidade de " + vet_tiposDeComodos[j] + ": ");
+									numero = scan.nextInt();
+									scan.nextLine();
+									if (numero >= 0) {
+										mat_comodosDosPredios[i][j] = numero;
+										ok = false;
+									} else {
+										System.out.print("\t\t\tERRO!A quantidade precisa ser >= 0! Informe novamente...\n");
+										ok = true;
+									} // fecha if-else
+								} catch (Exception e) {
+									System.out.print("\t\t\tERRO!Você não digitou um número válido! Informe novamente...\n");
+									ok = true;
+									scan.next();
+								} // fecha try-catch
+							} // fecha while
+						} // fecha for interno
+					} // fecha for externo
+					
+					// Ao terminar o cadastro, informa e aguardo o ENTER do usuário:
+					dadosOK = true;
+					System.out.print("\n  Cadastro dos prédios e cômodos realizado com sucesso!");
+					esperar();
+					break;
+				}
 				esperar();
 				break;
 				
@@ -391,7 +399,6 @@ public class TF_C3 {
 			System.out.print("\n  Pressione ENTER para continuar...");
 	 		String readString = scanner.nextLine();
 			if (readString.isEmpty()) {
-				//System.out.println("ENTER");
 				ok = false;
 			} else {
 				ok = true;
@@ -400,10 +407,6 @@ public class TF_C3 {
 	}
 	
 	// Cria método para esperar o ENTER do usuário para continuar:
-	//public static void esperar2() throws IOException {
-	//	System.out.print("\n\t  Pressione ENTER para continuar...");
-	//	System.in.read();
-	//}	
 	public static void esperar2() throws IOException {
 		Scanner scanner = new Scanner(System.in);
 		boolean ok = true;
@@ -411,7 +414,6 @@ public class TF_C3 {
 			System.out.print("\n\t  Pressione ENTER para continuar...");
 	 		String readString = scanner.nextLine();
 			if (readString.isEmpty()) {
-				//System.out.println("ENTER");
 				ok = false;
 			} else {
 				ok = true;
