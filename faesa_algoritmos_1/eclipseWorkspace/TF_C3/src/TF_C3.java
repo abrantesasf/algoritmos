@@ -216,7 +216,7 @@ public class TF_C3 {
 										ok = true;
 									} // fecha if-else
 								} catch (Exception e) {
-									System.out.print("\t\t\tERRO! Você não digitou um número válido!");
+									System.out.print("\t\t\tERRO! Você não digitou um número válido!\n");
 									ok = true;
 									scan.next();
 								} // fecha try-catch
@@ -261,7 +261,7 @@ public class TF_C3 {
 									} // fecha while
 								} // fecha for interno
 							} // fecha for externo
-							System.out.print("\n\t\tAlterado com sucesso!");
+							System.out.print("\n\t\tAlterado com sucesso!\n");
 							esperar2();
 							break;
 							
