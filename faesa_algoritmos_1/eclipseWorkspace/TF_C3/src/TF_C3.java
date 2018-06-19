@@ -22,8 +22,8 @@ public class TF_C3 {
 		boolean ok        = true;
 		boolean dadosOK   = false;
 		int     numero    = 0;
-		char    opçao1    = ' ';
-        char    opçao2    = ' ';
+		char    opcao1    = ' ';
+        char    opcao2    = ' ';
         String  nome      = null;
         String  temp      = null;
         String  temp2     = null;
@@ -44,10 +44,10 @@ public class TF_C3 {
 					System.out.print("\n  Opção inválida. Por favor, tente novamente:\n");
 				}
 			} while (temp.length() != 1);
-			opçao1 = temp.charAt(0);
+			opcao1 = temp.charAt(0);
 			
 			// Decide o que fazer de acordo com a opção do menu principal:
-			switch (opçao1) {
+			switch (opcao1) {
 			
 			// Cadastrar condomínio:
 			case '0':
@@ -176,11 +176,11 @@ public class TF_C3 {
 								System.out.print("\n\t  Opção inválida. Por favor, tente novamente:");
 							}
 						} while (temp2.length() != 1);
-					    opçao2 = temp2.charAt(0);
+					    opcao2 = temp2.charAt(0);
 						System.out.println("");
 						
 						// Decide o que fazer de acordo com a opção do menu alterar:
-						switch (opçao2) {
+						switch (opcao2) {
 						
 						// Altera o nome do condomínio:
 						case '1':
