@@ -3,12 +3,7 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class condominio {
-
-
-
-
-
-	public static void main(String[] args) throws IOException {
+public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
 
 		String [] comodos = {"Quarto", "Suíte", "Cozinha", "Sala", "Banheiro", "Varanda"};
@@ -23,10 +18,9 @@ public class condominio {
 		
 		do {
 
-			menu();
-			
-			String temp = null;
-			do {
+		menu();
+		String temp = null;
+		do {
 				System.out.print("\n\t\tInsira a opção desejada: ");
 				temp = scan.next();
 				if (temp.length() != 1) {
@@ -180,9 +174,6 @@ public class condominio {
 				
 				esperar();
 				break;
-				
-				
-				
 			case '5':
 				System.out.println("\n\tNomes: Abrantes, Brendhom e Iuri");
 				System.out.println("\tEncerrando o programa(...)");
@@ -190,7 +181,7 @@ public class condominio {
 				sair=false;
 				break;
 
-			default:
+			        default:
 				System.out.println("\n\t\tDigite um número valido!");
 				esperar();
 			}
@@ -212,13 +203,9 @@ public class condominio {
 				+ "\n\t 3) Nome do predio"
 				+ "\n\t 4) Quantidade de comodos"
 				+ "\n\t 5) Voltar\n");
-	}
-	
+	}	
 	public static void esperar() throws IOException {
 		System.out.println("\n\tPressione Enter para continuar...");
 		System.in.read();
 	}
-
 }
-
-
