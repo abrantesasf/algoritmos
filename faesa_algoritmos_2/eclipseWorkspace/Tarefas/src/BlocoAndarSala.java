@@ -53,7 +53,7 @@ public class BlocoAndarSala {
 	// Método para checagem básica do número
 	public static boolean checaNumero(int n) {
 		boolean retorno = true;
-		if ((n < 101) || (n > 999)) {
+		if ((n < 111) || (n > 999)) {
 			retorno = false;
 		} else if (Integer.toString(n).substring(1, 2).equals("0")
 				  ||
