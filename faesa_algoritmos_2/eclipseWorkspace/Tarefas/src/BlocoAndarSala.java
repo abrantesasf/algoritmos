@@ -1,3 +1,9 @@
+// Tarefa da disciplina de Algoritmo 2, Ciência da Computação, FAESA
+// Aluno: Abrantes Araújo Silva Filho
+// Em: 2018-08-07
+// Disponível em:
+// https://github.com/abrantesasf/algoritmos/blob/master/faesa_algoritmos_2/eclipseWorkspace/Tarefas/src/BlocoAndarSala.java
+
 // Imports
 import java.util.Scanner;
 
@@ -38,6 +44,9 @@ public class BlocoAndarSala {
 		System.out.println("Bloco: " + Integer.toString(numero).substring(0, 1));
 		System.out.println("Andar: " + Integer.toString(numero).substring(1, 2));
 		System.out.println("Sala:  " + Integer.toString(numero).substring(2, 3));
+		
+		// Morre
+		System.out.println("\n\nMoriturus te saluto.");
 
 	} // fecha main
 	
