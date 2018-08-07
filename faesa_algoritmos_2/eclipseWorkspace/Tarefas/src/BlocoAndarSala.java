@@ -30,7 +30,7 @@ public class BlocoAndarSala {
 					ok = true;
 				}				
 			} catch (Exception e) {
-				System.out.print("\nERRO! Você não digitou um INTEIRO entre 101 e 999.");
+				System.out.print("\nERRO! Você não digitou um INTEIRO entre 111 e 999.");
 				scan.next();
 				ok = true;
 			}
