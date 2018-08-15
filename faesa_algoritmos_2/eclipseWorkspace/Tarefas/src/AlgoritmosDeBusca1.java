@@ -27,22 +27,23 @@ public class AlgoritmosDeBusca1 {
 		
 		// Teste inicial do método buscaSequencial():
 		inicio = pegarTempo();
-		System.out.println(buscaSequencial(lista42, 41));
+		System.out.println(buscaSequencial(lista42, 99));
 		tempoGasto = pegarTempo() - inicio;
 		System.out.println(tempoGasto);
 
 	} // fecha o método Main
 	
 	// Método para realizar a busca sequencial
+	// Retorna (indice+1) se x existe em v, ou -1 caso contrário
 	public static int buscaSequencial (int[] v, int x) {
-		int indice = 0;
+		int indice = -1;
 		for (int i = 0; i < v.length; i++) {
 			if (v[i] == x) {
-				indice = i;
+				indice = (i + 1);
 				break;
 			}
 		} 
-		return (indice + 1);
+		return (indice);
 	}
 	
 	// Método para pegar o tempo
