@@ -14,11 +14,6 @@ public class AlgoritmosDeBusca1 {
 	// Método Main
 	public static void main(String[] args) {
 		
-		// Variáveis para marcar o tempo (serão atualizadas através do
-		// método pegaTempo():
-		long inicio;
-		long tempoGasto;
-		
 		// Criação de listas de números com 11, 21 e 42 elementos. Listas com final
 		// "a" são aleatórias, e listas com final "o" são ordenadas.
 		int[] lista11a = new int[]{48, 33, 24, 36, 41, 2, 23, 32, 50, 34, 28};
@@ -37,7 +32,7 @@ public class AlgoritmosDeBusca1 {
 		Arrays.sort(lista42o);
 		
 		System.out.println("Estudo sobre algoritmos de busca: comparação de busca linear e binária.");
-		System.out.println("\nArrays para teste: ");
+		System.out.println("\nArrays para testes: ");
 		System.out.print("Array de 11 elementos, aleatório: ");
 		imprimeArray(lista11a, 'h');
 		System.out.print("Array de 11 elementos, ordenado:  ");
@@ -52,103 +47,199 @@ public class AlgoritmosDeBusca1 {
 		imprimeArray(lista42o, 'h');
 		
 		// Vetores de resultado para buscaBinariaComContador:
-		int[] resultadoBuscaBinariaComContador = new int[3];
+		int[] resultadoBusca = new int[3];
 		
 		// BUSCA BINÁRIA COM CONTADOR, ARRAYS com 11 posições:
 		System.out.println("\n\nBusca Binária com Contador em array ordenado de 11 elementos, posição 2 (n.º 23):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista11o, 23);
+		resultadoBusca = buscaBinariaComContador(lista11o, 23);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Binária com Contador em array ordenado de 11 elementos, posição 6 (n.º 33):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista11o, 33);
+		resultadoBusca = buscaBinariaComContador(lista11o, 33);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Binária com Contador em array ordenado de 11 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista11o, 99);
+		resultadoBusca = buscaBinariaComContador(lista11o, 99);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		// BUSCA BINÁRIA COM CONTADOR, ARRAYS com 21 posições:
 		System.out.println("\nBusca Binária com Contador em array ordenado de 21 elementos, posição 2 (n.º 3):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista21o, 3);
+		resultadoBusca = buscaBinariaComContador(lista21o, 3);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Binária com Contador em array ordenado de 21 elementos, posição 11 (n.º 32):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista21o, 32);
+		resultadoBusca = buscaBinariaComContador(lista21o, 32);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Binária com Contador em array ordenado de 21 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista21o, 99);
+		resultadoBusca = buscaBinariaComContador(lista21o, 99);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		// BUSCA BINÁRIA COM CONTADOR, ARRAYS com 42 posições:
 		System.out.println("\nBusca Binária com Contador em array ordenado de 42 elementos, posição 2 (n.º 2):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista42o, 2);
+		resultadoBusca = buscaBinariaComContador(lista42o, 2);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 				
 		System.out.println("\nBusca Binária com Contador em array ordenado de 42 elementos, posição 21 (n.º 23):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista42o, 23);
+		resultadoBusca = buscaBinariaComContador(lista42o, 23);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 				
 		System.out.println("\nBusca Binária com Contador em array ordenado de 42 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaBinariaComContador(lista42o, 99);
+		resultadoBusca = buscaBinariaComContador(lista42o, 99);
 		System.out.print("{Posição, Contador While, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		// BUSCA SEQUENCIAL COM CONTADOR, ARRAYS com 11 posições:
 		System.out.println("\n\nBusca Sequencial com Contador em array aleatório de 11 elementos, posição 2 (n.º 33):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista11a, 33);
+		resultadoBusca = buscaSequencialComContador(lista11a, 33);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 11 elementos, posição 6 (n.º 2):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista11a, 2);
+		resultadoBusca = buscaSequencialComContador(lista11a, 2);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 11 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista11a, 99);
+		resultadoBusca = buscaSequencialComContador(lista11a, 99);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		// BUSCA SEQUENCIAL COM CONTADOR, ARRAYS com 21 posições:
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 21 elementos, posição 2 (n.º 3):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista21a, 3);
+		resultadoBusca = buscaSequencialComContador(lista21a, 3);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 21 elementos, posição 11 (n.º 5):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista21a, 5);
+		resultadoBusca = buscaSequencialComContador(lista21a, 5);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 21 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista21a, 99);
+		resultadoBusca = buscaSequencialComContador(lista21a, 99);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		// BUSCA SEQUENCIAL COM CONTADOR, ARRAYS com 42 posições:
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 42 elementos, posição 2 (n.º 36):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista42a, 36);
+		resultadoBusca = buscaSequencialComContador(lista42a, 36);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 42 elementos, posição 21 (n.º 19):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista42a, 19);
+		resultadoBusca = buscaSequencialComContador(lista42a, 19);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');
+		imprimeArray(resultadoBusca, 'h');
 		
 		System.out.println("\nBusca Sequencial com Contador em array aleatório de 42 elementos, posição inexistente (n.º 99):");
-		resultadoBuscaBinariaComContador = buscaSequencialComContador(lista42a, 99);
+		resultadoBusca = buscaSequencialComContador(lista42a, 99);
 		System.out.print("{Posição, Contador For, Contador IF} = ");
-		imprimeArray(resultadoBuscaBinariaComContador, 'h');		
+		imprimeArray(resultadoBusca, 'h');		
+		
+		// BUSCA BINÁRIA COM TEMPORIZADOR, ARRAYS com 11 posições:
+		System.out.println("\n\nBusca Binária com Temporizador em array ordenado de 11 elementos, posição 2 (n.º 23):");
+		resultadoBusca = buscaBinariaComTemporizador(lista11o, 23);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 11 elementos, posição 6 (n.º 33):");
+		resultadoBusca = buscaBinariaComTemporizador(lista11o, 33);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 11 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaBinariaComTemporizador(lista11o, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		// BUSCA BINÁRIA COM TEMPORIZADOR, ARRAYS com 21 posições:
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 21 elementos, posição 2 (n.º 3):");
+		resultadoBusca = buscaBinariaComTemporizador(lista21o, 3);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 21 elementos, posição 11 (n.º 32):");
+		resultadoBusca = buscaBinariaComTemporizador(lista21o, 32);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 21 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaBinariaComTemporizador(lista21o, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		// BUSCA BINÁRIA COM TEMPORIZADOR, ARRAYS com 42 posições:
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 42 elementos, posição 2 (n.º 2):");
+		resultadoBusca = buscaBinariaComTemporizador(lista42o, 2);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+				
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 42 elementos, posição 21 (n.º 23):");
+		resultadoBusca = buscaBinariaComTemporizador(lista42o, 23);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+				
+		System.out.println("\nBusca Binária com Temporizador em array ordenado de 42 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaBinariaComTemporizador(lista42o, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		// BUSCA SEQUENCIAL COM TEMPORIZADOR, ARRAYS com 11 posições:
+		System.out.println("\n\nBusca Sequencial com Temporizador em array aleatório de 11 elementos, posição 2 (n.º 33):");
+		resultadoBusca = buscaSequencialComTemporizador(lista11a, 33);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 11 elementos, posição 6 (n.º 2):");
+		resultadoBusca = buscaSequencialComTemporizador(lista11a, 2);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 11 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaSequencialComTemporizador(lista11a, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		// BUSCA SEQUENCIAL COM TEMPORIZADOR, ARRAYS com 21 posições:
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 21 elementos, posição 2 (n.º 3):");
+		resultadoBusca = buscaSequencialComTemporizador(lista21a, 3);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 21 elementos, posição 11 (n.º 5):");
+		resultadoBusca = buscaSequencialComTemporizador(lista21a, 5);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 21 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaSequencialComTemporizador(lista21a, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		// BUSCA SEQUENCIAL COM TEMPORIZADOR, ARRAYS com 42 posições:
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 42 elementos, posição 2 (n.º 36):");
+		resultadoBusca = buscaSequencialComTemporizador(lista42a, 36);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 42 elementos, posição 21 (n.º 19):");
+		resultadoBusca = buscaSequencialComTemporizador(lista42a, 19);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');
+		
+		System.out.println("\nBusca Sequencial com Temporizador em array aleatório de 42 elementos, posição inexistente (n.º 99):");
+		resultadoBusca = buscaSequencialComTemporizador(lista42a, 99);
+		System.out.print("{Posição, Tempo Gasto, <zero>} = ");
+		imprimeArray(resultadoBusca, 'h');		
 
 		// Morre
 		morre();
@@ -178,6 +269,38 @@ public class AlgoritmosDeBusca1 {
 		vetorRetorno[0] = -1;
 		vetorRetorno[1] = contadorFor;
 		vetorRetorno[2] = contadorIf;
+		return vetorRetorno;
+	}
+	
+	// Método para realizar a busca sequencial com temporizador
+	// Retorna (indice+1) se x existe em v, ou -1 caso contrário
+	public static int[] buscaSequencialComTemporizador (int[] v, int x) {
+		// Pega time inicial
+		long timeInicio = 0;
+		timeInicio = pegaTempo();
+		long timeFinal = 0;
+		long tempoGasto = 0;
+		// Delay de 1 segundo
+		//pausa(1);
+				
+		// Vetor retorno
+		int[] vetorRetorno = new int[3];
+		
+		for (int i = 0; i < v.length; i++) {
+			if (v[i] == x) {
+				vetorRetorno[0] = i + 1;
+				timeFinal = pegaTempo();
+				tempoGasto = timeFinal - timeInicio;
+				vetorRetorno[1] = (int)tempoGasto;
+				vetorRetorno[2] = 0;
+				return vetorRetorno;
+			}
+		}
+		vetorRetorno[0] = -1;
+		timeFinal = pegaTempo();
+		tempoGasto = timeFinal - timeInicio;
+		vetorRetorno[1] = (int)tempoGasto;
+		vetorRetorno[2] = 0;
 		return vetorRetorno;
 	}
 	
@@ -225,9 +348,58 @@ public class AlgoritmosDeBusca1 {
 		return vetorRetorno;
 	}
 	
+	// Método para binary search com temporizador, implementada 
+	// conforme "Algorithms Unlocked", de Thomas H. Cormen, páginas 28-31. 
+	// Retorna array com 3 elementos:
+	//    1º elemento = (indice + 1), se x existe em v, ou -1 caso contrário
+	//    2º elemento = contadorWhile
+	//    3º elemento = contadorIf
+	public static int[] buscaBinariaComTemporizador (int[] v, int x) {
+		// Pega time inicial
+		long timeInicio = 0;
+		timeInicio = pegaTempo();
+		long timeFinal = 0;
+		long tempoGasto = 0;
+		// Delay de 1 segundo
+		//pausa(1);
+		
+		// Vetor retorno
+		int[] vetorRetorno = new int[3];
+		
+		// Índices de controle para a binary search:
+		int p = 0;
+		int r = v.length - 1;
+		int q = 0;
+		
+		while (p <= r) {
+			q = (p + r)/2;
+			
+			if (v[q] == x) {
+				vetorRetorno[0] = (q + 1);
+				timeFinal = pegaTempo();
+				tempoGasto = timeFinal - timeInicio;
+				vetorRetorno[1] = (int)tempoGasto;
+				vetorRetorno[2] = 0;
+				return vetorRetorno;
+			} else {
+				if (v[q] > x) {
+					r = (q - 1);
+				} else {
+					p = q + 1;
+				}
+			}
+		}
+		vetorRetorno[0] = -1;
+		timeFinal = pegaTempo();
+		tempoGasto = timeFinal - timeInicio;
+		vetorRetorno[1] = (int)tempoGasto;
+		vetorRetorno[2] = 0;
+		return vetorRetorno;
+	}	
+	
 	// Método para pegar o tempo
 	public static long pegaTempo() {
-		return System.currentTimeMillis();
+		return System.nanoTime();
 	}
 	
 	// Método simplório para imprimir um array de inteiros.
@@ -253,6 +425,15 @@ public class AlgoritmosDeBusca1 {
 	// Morre
 	public static void morre() {
 		System.out.println("\nMoriturus te saluto.\n");
+	}
+	
+	// Função para delay (input = qtd de segundos para delay):
+	public static void pausa(int s) {
+		try {
+			Thread.sleep(s * 1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 } // Fecha a classe
