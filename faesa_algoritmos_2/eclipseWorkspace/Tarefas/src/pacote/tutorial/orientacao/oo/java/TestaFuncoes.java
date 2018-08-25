@@ -27,6 +27,7 @@ public class TestaFuncoes {
 		double doubleY = 0;
 		int intX = 0;
 		int intY = 0;
+		double[] vetor;
 		
 		// Variáveis para controle e contagem de loops:
 		boolean ok = true;
@@ -72,12 +73,59 @@ public class TestaFuncoes {
 			}
 		}
 		
+		// Quantos elementos no vetor?
+		ok = true;
+		contador = 0;
+		while ((ok) & (contador == 0)) {
+			try {
+				System.out.println("Quantos números você quer somar? Responda com um inteiro maior do 0: ");
+				contador = scan.nextInt();
+				if (contador < 1) {
+					System.out.println("\nENTRADA INVÁLIDA! A quantidade de números a serem somados deve ser maior do que o. Tente novamente:");
+					contador = 0;
+					ok = true;
+				} else {
+					ok = false;
+				}
+			} catch (Exception e) {
+				System.out.println("\nENTRADA INVÁLIDA! Tente novamente:");
+				scan.next();
+				contador = 0;
+				ok = true;
+			}
+		}
+		
+		// Inicializa o vetor:
+		vetor = new double[contador];
+		
+		// Preenche o vetor:
+		for (int i = 0; i < vetor.length; i++) {
+			ok = true;
+			while (ok) {
+				try {
+					System.out.println("Informe o " + (i+1) + "º número:");
+					vetor[i] = scan.nextDouble();
+					ok = false;
+					if (i == (vetor.length - 1)) {
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println("\nENTRADA INVÁLIDA. Tente novamente:");
+					scan.next();
+					ok = true;
+				}
+			}
+		}
+		
 		// Imprime os resultados:
 		System.out.println("\nSoma de inteiros:");
 		funcoes.somaValor(intX, intY);
 		
 		System.out.println("\nSoma de reais:");
 		funcoes.somaValor(doubleX, doubleY);
+		
+		System.out.println("\nSoma de números em um vetor:");
+		funcoes.somaValor(vetor);
 		
 		// Fecha scanner:
 		scan.close();
