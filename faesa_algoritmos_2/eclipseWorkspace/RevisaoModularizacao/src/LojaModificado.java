@@ -4,16 +4,16 @@
 import java.text.Normalizer;
 import java.util.Scanner;
 
-public class Loja {
+public class LojaModificado {
+	// Variáveis
+	static int[]    codVendedor;
+	static String[] nomeVendedor;
+	static double[] vendaMensal;
+	
 
 	public static void main(String[] args) {
-		// Variáveis
-		int      qtdVendedores = 3;
-		int[]    codVendedor   = new int[qtdVendedores];
-		String[] nomeVendedor  = new String[qtdVendedores];
-		double[] vendaMensal   = new double[qtdVendedores];
 		int[]    acao          = {0};
-		int[]    cadastroOK    = {0};
+		int[]    cadastroOK    = {0};		
 		
 		while (! (acao[0] == 5)) {
 			menu(codVendedor, nomeVendedor, vendaMensal, acao, cadastroOK);
@@ -118,6 +118,12 @@ public class Loja {
 	
 	// Método cadastrarDados
 	static void cadastrarDados(int[] refCodVendedor, String[] refNomeVendedor, double[] refVendaMensal) {
+		// Simula perguntar quantos vendedores e inicializa as variáveis:
+		int qtdVendedores = 3;
+		refCodVendedor    = new int[qtdVendedores];
+		refNomeVendedor   = new String[qtdVendedores];
+		refVendaMensal    = new double[qtdVendedores];
+		
 		// Variáveis e objetos:
 		Scanner scanc = new Scanner(System.in);
 		

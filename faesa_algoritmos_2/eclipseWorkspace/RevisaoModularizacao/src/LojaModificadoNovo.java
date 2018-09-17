@@ -4,19 +4,19 @@
 import java.text.Normalizer;
 import java.util.Scanner;
 
-public class Loja {
+public class LojaModificadoNovo {
+	// Variáveis
+	static int[]    codVendedor;
+	static String[] nomeVendedor;
+	static double[] vendaMensal;
+	
 
 	public static void main(String[] args) {
-		// Variáveis
-		int      qtdVendedores = 3;
-		int[]    codVendedor   = new int[qtdVendedores];
-		String[] nomeVendedor  = new String[qtdVendedores];
-		double[] vendaMensal   = new double[qtdVendedores];
 		int[]    acao          = {0};
-		int[]    cadastroOK    = {0};
+		int[]    cadastroOK    = {0};		
 		
 		while (! (acao[0] == 5)) {
-			menu(codVendedor, nomeVendedor, vendaMensal, acao, cadastroOK);
+			menu(acao, cadastroOK);
 		}
 		
 		// Sai do programa
@@ -25,7 +25,7 @@ public class Loja {
 	} // fecha main
 	
 	// Método para mostrar o menu
-	static void menu(int[] refCodVendedor, String[] refNomeVendedor, double[] refVendaMensal, int[] refAcao, int[] refCadastroOK) {
+	static void menu(int[] refAcao, int[] refCadastroOK) {
 		int opcao = 0;
 		boolean ok = true;
 		Scanner scan = new Scanner(System.in);
@@ -67,7 +67,7 @@ public class Loja {
 		case 4:
 			// Mostra dados:
 			if (refCadastroOK[0] == 1) {
-				mostrarDados(refCodVendedor, refNomeVendedor, refVendaMensal);
+				mostrarDados();
 			} else {
 				System.out.println("\nOPA! Você não fez o cadastro dos dados ainda!");
 				System.out.println("Você será direcionado ao menu principal.\n");
@@ -76,7 +76,7 @@ public class Loja {
 		
 		case 1:
 			// Chama método para cadastrar dados dos vendedores
-			cadastrarDados(refCodVendedor, refNomeVendedor, refVendaMensal);
+			cadastrarDados();
 			refCadastroOK[0] = 1;
 			// Volta para o menu
 			refAcao[0] = 0;
@@ -85,7 +85,7 @@ public class Loja {
 		case 3:
 			// Chame método para mostraro melhor vendedor, se o cadastro está feito
 			if (refCadastroOK[0] == 1) {
-				mostrarMelhorVendedor(refNomeVendedor, refVendaMensal);
+				mostrarMelhorVendedor();
 			} else {
 				System.out.println("\nOPA! Você não fez o cadastro dos dados ainda!");
 				System.out.println("Você será direcionado ao menu principal.\n");
@@ -97,7 +97,7 @@ public class Loja {
 		case 2:
 			// Chama método para pesquisar o nome de um vendedor e alterar sua venda:
 			if (refCadastroOK[0] == 1) {
-				alterarVenda(refNomeVendedor, refVendaMensal);
+				alterarVenda();
 			} else {
 				System.out.println("\nOPA! Você não fez o cadastro dos dados ainda!");
 				System.out.println("Você será direcionado ao menu principal.\n");
@@ -117,22 +117,28 @@ public class Loja {
 	} // fecha método menu
 	
 	// Método cadastrarDados
-	static void cadastrarDados(int[] refCodVendedor, String[] refNomeVendedor, double[] refVendaMensal) {
+	static void cadastrarDados() {
+		// Simula perguntar quantos vendedores e inicializa as variáveis:
+		int qtdVendedores = 3;
+		codVendedor    = new int[qtdVendedores];
+		nomeVendedor   = new String[qtdVendedores];
+		vendaMensal    = new double[qtdVendedores];
+		
 		// Variáveis e objetos:
 		Scanner scanc = new Scanner(System.in);
 		
 		System.out.println("Cadastre os dados dos vendedores:");
-		for (int i = 0; i < refCodVendedor.length; i++) {
+		for (int i = 0; i < codVendedor.length; i++) {
 			boolean ok         = true;			
 			while (ok) {
 				try {
 					System.out.println("\nInforme o código do " + (i+1) + "º vendedor: ");
-					refCodVendedor[i] = scanc.nextInt();
+					codVendedor[i] = scanc.nextInt();
 					scanc.nextLine();
 					System.out.println("Informe o nome do " + (i+1) + "º vendedor: ");
-					refNomeVendedor[i] = scanc.nextLine();
+					nomeVendedor[i] = scanc.nextLine();
 					System.out.println("Informe a venda mensal do " + (i+1) + "º vendedor: ");
-					refVendaMensal[i] = scanc.nextDouble();
+					vendaMensal[i] = scanc.nextDouble();
 					ok = false;
 				} catch (Exception e) {
 					System.out.println("ERRO! Você não digitou um código válido. Tente novamente.");
@@ -147,23 +153,23 @@ public class Loja {
 	} // fecha cadastrarDados
 	
 	// Método mostrarMelhorVendedor
-	static void mostrarMelhorVendedor(String[] refNomeVendedor, double[] refVendaMensal) {
+	static void mostrarMelhorVendedor() {
 		double maior = 0;
 		int indice = 0;
 		
-		for (int i = 0; i < refVendaMensal.length; i++) {
-			if (refVendaMensal[i] > maior) {
-				maior = refVendaMensal[i];
+		for (int i = 0; i < vendaMensal.length; i++) {
+			if (vendaMensal[i] > maior) {
+				maior = vendaMensal[i];
 				indice = i;
 			}
 		}
 		
-		System.out.println("\nO vendedor com a maior venda mensal é: " + refNomeVendedor[indice]);
+		System.out.println("\nO vendedor com a maior venda mensal é: " + nomeVendedor[indice]);
 		System.out.println("Você será direcionado para o menu principal.\n");
 	} // Fecha método mostrarMelhorVendedor
 	
 	// Método alterarVenda
-	static void alterarVenda(String[] refNomeVendedor, double[] refVendaMensal) {
+	static void alterarVenda() {
 		// Variáveis e objetos:
 		Scanner scan = new Scanner(System.in);
 		String nome = "";
@@ -182,11 +188,11 @@ public class Loja {
 		} // fecha while
 		
 		// Pesquisa por nome e obtém o índice (-1 se não achar)
-		for (int i = 0; i < refNomeVendedor.length; i++) {
+		for (int i = 0; i < nomeVendedor.length; i++) {
 			// Normaliza os nomes (remova acentos, caracteres especiais, etc., e compara a string normalizada).
 			// Claro, com a ajudinha de:
 			//https://stackoverflow.com/questions/86780/how-to-check-if-a-string-contains-another-string-in-a-case-insensitive-manner-in/40508106#40508106
-			if (Normalizer.normalize(refNomeVendedor[i], Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "").toLowerCase().contains(Normalizer.normalize(nome, Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "").toLowerCase())) {
+			if (Normalizer.normalize(nomeVendedor[i], Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "").toLowerCase().contains(Normalizer.normalize(nome, Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "").toLowerCase())) {
 				indice = i;
 			}
 		}
@@ -198,8 +204,8 @@ public class Loja {
 			ok = true;
 			while (ok) {
 				try {
-					System.out.println("Altere o valor da venda mensal para o vendedor: " + refNomeVendedor[indice]);
-					refVendaMensal[indice] = scan.nextDouble();
+					System.out.println("Altere o valor da venda mensal para o vendedor: " + nomeVendedor[indice]);
+					vendaMensal[indice] = scan.nextDouble();
 					ok = false;
 					System.out.println("Valor da venda alterado com sucesso.");
 					System.out.println("Você será direcionado ao menu principal.\n");
@@ -213,11 +219,11 @@ public class Loja {
 	} // alterarVenda
 	
 	// Método mostrarDados
-	static void mostrarDados (int[] refCodVendedor, String[] refNomeVendedor, double[] refVendaMensal) {
+	static void mostrarDados () {
 		System.out.println("Vendedores cadastrados:");
 		System.out.println("CÓDIGO\t\tVENDA\t\tNOME");
-		for (int i = 0; i < refCodVendedor.length; i++) {
-			System.out.println(refCodVendedor[i] + "\t\t" + refVendaMensal[i] + "\t\t" + refNomeVendedor[i] + "\n");
+		for (int i = 0; i < codVendedor.length; i++) {
+			System.out.println(codVendedor[i] + "\t\t" + vendaMensal[i] + "\t\t" + nomeVendedor[i] + "\n");
 		}
 	}
 
