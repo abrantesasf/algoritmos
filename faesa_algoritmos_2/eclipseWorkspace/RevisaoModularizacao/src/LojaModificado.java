@@ -1,5 +1,7 @@
 // Revisão de Modularização
 // Abrantes Araújo Silva Filho
+// ATENÇÃO: este código não funciona pois no Java não existe
+//          passagem de parâmetros por referência.
 
 import java.text.Normalizer;
 import java.util.Scanner;
