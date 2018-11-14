@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Algoritmo 2" id="Project_5c9bc65" template="Default" database="PostgreSQL" >
+	<schema name="algoritmo2" schemaname="algoritmo2" >
+		<table name="alunos" >
+			<column name="matricula" type="varchar" length="8" jt="12" mandatory="y" />
+			<column name="nome" type="varchar" length="50" jt="12" />
+			<column name="telefone" type="varchar" length="50" jt="12" />
+			<column name="endereco" type="varchar" length="50" jt="12" />
+			<column name="sexo" type="char" length="1" jt="1" />
+			<column name="nascimento" type="date" jt="91" />
+			<column name="periodo" type="smallint" jt="5" />
+			<index name="pk_aluno" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+		</table>
+		<table name="disciplinas" >
+			<column name="disciplina" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="dificuldade" type="char" length="1" jt="1" />
+			<index name="pk_disciplinas" unique="PRIMARY_KEY" >
+				<column name="disciplina" />
+			</index>
+			<constraint name="cc_disciplinas_dificuldade" >
+				<string>dificuldade IN (&#039;F&#039;, &#039;M&#039;, &#039;D&#039;)</string>
+			</constraint>
+		</table>
+		<table name="escola" >
+			<column name="escola" type="varchar" length="50" jt="12" mandatory="y" />
+			<index name="pk_escola" unique="PRIMARY_KEY" >
+				<column name="escola" />
+			</index>
+		</table>
+		<table name="pessoas" >
+			<column name="nome" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="telefone" type="varchar" length="50" jt="12" />
+			<column name="endereco" type="varchar" length="50" jt="12" />
+			<column name="sexo" type="char" length="1" jt="1" />
+			<column name="nascimento" type="date" jt="91" />
+			<index name="pk_pessoas" unique="PRIMARY_KEY" >
+				<column name="nome" />
+			</index>
+			<constraint name="cc_pessoas_sexo" >
+				<string>sexo IN (&#039;M&#039;, &#039;F&#039;)</string>
+			</constraint>
+		</table>
+		<table name="turmas" >
+			<column name="turma" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="vagas" type="integer" jt="4" />
+			<column name="disciplina" type="varchar" length="50" jt="12" />
+			<index name="pk_turmas" unique="PRIMARY_KEY" >
+				<column name="turma" />
+			</index>
+			<index name="idx_turmas_disciplina" unique="NORMAL" >
+				<column name="disciplina" />
+			</index>
+			<fk name="fk_turmas_disciplinas" to_schema="algoritmo2" to_table="disciplinas" >
+				<fk_column name="disciplina" pk="disciplina" />
+			</fk>
+		</table>
+		<table name="turmas_alunos" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="turma" type="varchar" length="50" jt="12" />
+			<column name="matricula" type="varchar" length="50" jt="12" />
+			<column name="inicio" type="date" jt="91" mandatory="y" />
+			<column name="fim" type="date" jt="91" mandatory="y" />
+			<index name="pk_turmas_alunos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_turmas_alunos_turma" unique="NORMAL" >
+				<column name="turma" />
+			</index>
+			<index name="idx_turmas_alunos_matricula" unique="NORMAL" >
+				<column name="matricula" />
+			</index>
+			<fk name="fk_turmas_alunos_turmas" to_schema="algoritmo2" to_table="turmas" >
+				<fk_column name="turma" pk="turma" />
+			</fk>
+			<fk name="fk_turmas_alunos_alunos" to_schema="algoritmo2" to_table="alunos" >
+				<fk_column name="matricula" pk="matricula" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_4a2922a" show_relation="name" >
+		<entity schema="algoritmo2" name="disciplinas" color="C1D8EE" x="784" y="48" />
+		<entity schema="algoritmo2" name="alunos" color="C1D8EE" x="48" y="48" />
+		<entity schema="algoritmo2" name="turmas_alunos" color="C1D8EE" x="304" y="48" />
+		<entity schema="algoritmo2" name="turmas" color="C1D8EE" x="576" y="48" />
+		<entity schema="algoritmo2" name="pessoas" color="C1D8EE" x="208" y="288" />
+		<entity schema="algoritmo2" name="escola" color="C1D8EE" x="496" y="288" />
+	</layout>
+</project>

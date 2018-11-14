@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="biblioteca" id="Project_1efb295" template="Default" database="PostgreSQL" >
+	<comment><![CDATA[DER para o trabalho de Algoritmo II]]></comment>
+	<schema name="biblioteca" schemaname="biblioteca" >
+		<table name="alunos" >
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[ID da tabela alunos]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do aluno]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" >
+				<comment><![CDATA[Endereço do aluno (genérico, todos os campos)]]></comment>
+			</column>
+			<column name="data_ingresso" type="date" jt="91" >
+				<comment><![CDATA[Data do ingresso do aluno na faculdade]]></comment>
+			</column>
+			<column name="id_curso" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela de cursos]]></comment>
+			</column>
+			<index name="pk_usuarios" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_alunos_id_curso" unique="NORMAL" >
+				<column name="id_curso" />
+			</index>
+			<fk name="fk_alunos_cursos" to_schema="biblioteca" to_table="cursos" >
+				<fk_column name="id_curso" pk="id" />
+				<comment><![CDATA[FK entre a tabela de alunos e cursos]]></comment>
+			</fk>
+		</table>
+		<table name="cursos" >
+			<comment><![CDATA[Tabela de cursos]]></comment>
+			<column name="id" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela de cursos]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do curso]]></comment>
+			</column>
+			<index name="pk_cursos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="emprestimos" >
+			<column name="id" type="integer" jt="4" />
+		</table>
+		<table name="emprestimos_itens" >
+			<column name="id" type="integer" jt="4" />
+		</table>
+		<table name="funcionarios" >
+			<comment><![CDATA[Tabela de funcionários]]></comment>
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[ID da tabela de funcionários]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do funcionário]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" >
+				<comment><![CDATA[Endereço do funcionário]]></comment>
+			</column>
+			<column name="data_ingresso" type="date" jt="91" >
+				<comment><![CDATA[Data de contratação do funcionário]]></comment>
+			</column>
+			<column name="id_setor" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela de setores]]></comment>
+			</column>
+			<column name="senha" type="varchar" length="50" jt="12" >
+				<comment><![CDATA[Senha do usuário (mínimo de 8 caracteres, máximo de 50)]]></comment>
+			</column>
+			<column name="login" type="varchar" length="50" jt="12" >
+				<comment><![CDATA[Nome do login do usuário]]></comment>
+			</column>
+			<index name="pk_funcionarios" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_funcionarios_id_setor" unique="NORMAL" >
+				<column name="id_setor" />
+			</index>
+			<fk name="fk_funcionarios_setores" to_schema="biblioteca" to_table="setores" >
+				<fk_column name="id_setor" pk="id" />
+				<comment><![CDATA[FK entre os funcionários e os setores]]></comment>
+			</fk>
+		</table>
+		<table name="itens" >
+			<column name="id" type="integer" jt="4" />
+		</table>
+		<table name="professores" >
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela de professores]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do professor]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" >
+				<comment><![CDATA[Endereço global do professor]]></comment>
+			</column>
+			<column name="data_ingresso" type="date" jt="91" >
+				<comment><![CDATA[Data de ingresso do professor na faculdade.]]></comment>
+			</column>
+			<column name="id_setor" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela de setores]]></comment>
+			</column>
+			<index name="pk_professores" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_professores_id_setor" unique="NORMAL" >
+				<column name="id_setor" />
+			</index>
+			<fk name="fk_professores_setores" to_schema="biblioteca" to_table="setores" >
+				<fk_column name="id_setor" pk="id" />
+				<comment><![CDATA[FK entre a tabela de professores e setores]]></comment>
+			</fk>
+		</table>
+		<table name="setores" >
+			<comment><![CDATA[Tabela de setores da faculdade]]></comment>
+			<column name="id" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela de setores]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do setor]]></comment>
+			</column>
+			<index name="pk_setores" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Geral" id="Layout_ebb10b" show_column_type="y" show_relation="name" >
+		<entity schema="biblioteca" name="itens" color="C1D8EE" x="576" y="48" />
+		<entity schema="biblioteca" name="setores" color="C1D8EE" x="144" y="48" />
+		<entity schema="biblioteca" name="professores" color="C1D8EE" x="48" y="240" />
+		<entity schema="biblioteca" name="emprestimos" color="C1D8EE" x="464" y="80" />
+		<entity schema="biblioteca" name="emprestimos_itens" color="C1D8EE" x="544" y="176" />
+		<entity schema="biblioteca" name="cursos" color="C1D8EE" x="768" y="160" />
+		<entity schema="biblioteca" name="funcionarios" color="C1D8EE" x="272" y="240" />
+		<entity schema="biblioteca" name="alunos" color="C1D8EE" x="512" y="272" />
+	</layout>
+</project>

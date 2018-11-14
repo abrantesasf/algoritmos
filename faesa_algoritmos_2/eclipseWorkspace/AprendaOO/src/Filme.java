@@ -3,11 +3,13 @@ public class Filme {
 	// Atributos
 	private int    codigo;
 	private String titulo;
-	private char   genero;
+	private GeneroFilme genero = new GeneroFilme();
 	
-	// Construtor
-	public Filme(int codigo, String titulo, char genero) {
-		super();
+	// Construtores
+	public Filme() {
+	}
+	
+	public Filme(int codigo, String titulo, GeneroFilme genero) {
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.genero = genero;
@@ -23,7 +25,7 @@ public class Filme {
 	}
 
 	protected char getGenero() {
-		return genero;
+		return genero.getGenero();
 	}
 
 	// Setters
@@ -36,7 +38,7 @@ public class Filme {
 	}
 
 	protected void setGenero(char genero) {
-		this.genero = genero;
+		this.genero.setGenero(genero);
 	}
 
 }
