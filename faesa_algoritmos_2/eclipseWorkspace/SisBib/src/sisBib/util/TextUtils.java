@@ -13,6 +13,30 @@ import java.text.Normalizer;
  */
 public class TextUtils {
 	
+	///////////////////////////////////////////////////
+	// Definições de atributos:
+	///////////////////////////////////////////////////
+	
+	// nenhum atributo por enquanto
+	
+	
+	///////////////////////////////////////////////////
+	// Construtor(es)
+	///////////////////////////////////////////////////	
+	
+	/**
+	 * <p>O construtor para a classe TextUtils não necessita de nenhum 
+	 * parâmetro.</p>
+	 */
+	public TextUtils() {
+		// só o construtor padrão mesmo
+	}
+	
+	
+	///////////////////////////////////////////////////
+	// Métodos
+	///////////////////////////////////////////////////	
+	
 	/**
 	 * <p><b>buscaS1emS2(String <i>string1</i>, String <i>string2</i>)</b></p>
 	 * 

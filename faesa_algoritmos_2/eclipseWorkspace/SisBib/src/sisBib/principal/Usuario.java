@@ -1,4 +1,4 @@
-package sisBib.classes;
+package sisBib.principal;
 
 // Importação de bibliotecas:
 import java.util.Date;

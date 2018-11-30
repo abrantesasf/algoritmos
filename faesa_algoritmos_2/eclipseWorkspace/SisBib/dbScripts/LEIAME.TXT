@@ -1,0 +1,44 @@
+/* ========================================================= */
+/* Banco de dados para o trabalho da disciplina: Algoritmo 2 */
+/* --------------------------------------------------------- */
+/* Sistema de Biblioteca: SisBib                             */
+/* --------------------------------------------------------- */
+/* Abrantes Araújo Silva Filho                               */
+/* Isaac de Miranda Campos                                   */
+/* ========================================================= */
+
+ANTES DE INSTALAR, LEIA ESTE DOCUMENTO ATÉ O FIM!
+
+Para instalar o banco de dados do projeto SisBib em um banco de dados
+PostgreSQL, você precisa do login/senha do superusuário do cluster
+do PostgreSQL (geralmente chamado de postgres). Também será
+necessário que as permissões de acesso estejam corretas e configuradas
+para os usuários utilizados durante a instalação.
+
+Para que a geração dos 2 logs de checagem da instalação seja correta,
+é "obrigatória" a instalação com o seguinte comando:
+
+   psql -U postgres < instalacao.sql | tee log_instalacao.txt
+
+Obs.: o comando acima roda perfeitamente no Linux mas no Windows
+podem ocorrer problemas. Você precisará rodar o comando em uma
+janela do "Windows PowerShell" e não em uma janela de comandos
+normal (talvez seja necessário instalar o Windows PowerShell).
+
+Se você não conseguir rodar o comando acima para a instalação
+no Windows (você REALMENTE tem coragem de usar o PostgreSQL
+no Windows?) a instalação deve ser feita com o comando abaixo (você
+só terá 1 log de checagem, e não 2 como no Linux: azar o seu por usar
+o Windows):
+
+   psql -U postgres < instalacao.sql
+
+Você será solicitado a informar o nome do banco de dados a ser criado.
+Pode ser qualquer nome mas, por padrão para este projeto, utilize dentre:
+
+   sisbib
+
+ATENÇÃO: se o banco de dados que você informar já existir no cluster
+do PostgreSQL, ele será === TOTALMENTE APAGADO E DESTRUÍDO === incluindo
+quaisquer dados existentes. Portanto, tenha certeza de que é isso
+mesmo o que você quer fazer para não chorar lágrimas de sangue depois.

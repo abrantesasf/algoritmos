@@ -9,19 +9,19 @@ public class TestaDB {
 
 		String sql = "";
 		
-		db.abrirConexao("vdiesel", "123d45");
+		db.abrirConexao("vdiesel", "12345");
 		
 		sql = "SELECT * "
 			+ "FROM filiais "
 			+ "WHERE 1 = ? "
 			+ "ORDER BY ? ";
-		sql = "SELECT * FROM filiais WHERE 1 = ? AND (id = ? or id = ?) ORDER BY filial ";
+		sql = "SELECT * FROM filiais WHERE 1 = ? ORDER BY id ";
 		
 		try {
 			db.prepararQuery(sql);
 			db.usarQuery().setInt(1, 1);
-			db.usarQuery().setInt(2, 10);
-			db.usarQuery().setInt(3, 40);
+			//db.usarQuery().setInt(2, 61);
+			//db.usarQuery().setInt(3, 63);
 			//db.usarQuery().setInt(4, 2);
 			db.executarQuery();
 			//query = db.usarConexao().prepareStatement(sql);

@@ -1,0 +1,47 @@
+/* ====================================================================== */
+/* Instalação do banco de dados para o projeto SisBib */
+/* Abrantes Araújo Silva Filho */
+/* Isaac de Miranda Campos */
+/* ====================================================================== */
+
+=== Obtendo nome do banco de dados do usuário ===
+
+=== Removendo o banco de dados antigo, se exister ===
+DROP DATABASE
+
+=== Cria as roles ===
+DROP ROLE
+DROP ROLE
+CREATE ROLE
+COMMENT
+CREATE ROLE
+COMMENT
+
+=== Cria o banco de dados ===
+CREATE DATABASE
+COMMENT
+GRANT
+
+=== Conectando-se ao novo banco de dados, como usuário postgres ===
+
+=== Cria o schema específico, remove o schema public e revoga privilégios de PUBLIC ===
+DROP SCHEMA
+DROP SCHEMA
+CREATE SCHEMA
+COMMENT
+REVOKE
+REVOKE
+GRANT
+
+=== Conectando-se ao novo banco de dados, como usuário dba ===
+
+=== Tabela e dados das filiais ===
+CREATE TABLE
+CREATE INDEX
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+GRANT
+

@@ -1,4 +1,4 @@
-package sisBib.classes;
+package sisBib.principal;
 
 /**
  * <p>A classe Professor herda da Classe Usuario e acrescenta informações

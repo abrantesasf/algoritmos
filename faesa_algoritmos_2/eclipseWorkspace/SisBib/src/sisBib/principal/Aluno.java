@@ -1,4 +1,4 @@
-package sisBib.classes;
+package sisBib.principal;
 
 /**
  * <p>A classe Aluno herda da Classe Usuario e acrescenta informações

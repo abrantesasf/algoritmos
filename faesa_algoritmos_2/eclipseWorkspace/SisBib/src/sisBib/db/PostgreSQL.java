@@ -2,6 +2,7 @@ package sisBib.db;
 
 //Importação de bibliotecas:
 import java.sql.*;
+import sisBib.util.Config;
 
 /**
  * <p>A classe PostgreSQL contém os métodos para realizar a conexão com um banco de dados
@@ -30,32 +31,49 @@ public class PostgreSQL {
 	///////////////////////////////////////////////////
 	
 	/**
-	 * <p><b>driver</b>:</p>
+	 * <p><b>dbDriver</b>:</p>
 	 * <ul>
 	 * <li>Driver JDBC a ser utilizado</li>
 	 * <li>Tipo: String</li>
 	 * </ul>
 	 */
-	private String driver = "";
+	private String dbDriver = "";
 	
 	/**
-	 * <p><b>caminho</b>:</p>
+	 * <p><b>dbLibPath</b>:</p>
 	 * <ul>
 	 * <li>Path do driver JDBC a ser utilizado</li>
 	 * <li>Tipo: String</li>
 	 * </ul>
 	 */
-	@SuppressWarnings("unused")
-	private String caminho = "";
+	private String dbLibPath = "";
 	
 	/**
-	 * <p><b>url</b>:</p>
+	 * <p><b>dbUrl</b>:</p>
 	 * <ul>
 	 * <li>URL (uniform resourse locator) para a conexão do banco de dados</li>
 	 * <li>Tipo: String</li>
 	 * </ul>
 	 */
-	private String url = "";
+	private String dbUrl = "";
+	
+	/**
+	 * <p><b>dbLingua</b>:</p>
+	 * <ul>
+	 * <li>Configuração de linguagem a ser utilizada no banco de dados</li>
+	 * <li>Tipo: String</li>
+	 * </ul>
+	 */
+	private String dbLingua = "";
+	
+	/**
+	 * <p><b>dbPais</b>:</p>
+	 * <ul>
+	 * <li>Configuração de país a ser utilizada no banco de dados</li>
+	 * <li>Tipo: String</li>
+	 * </ul>
+	 */
+	private String dbPais = "";
 	
 	/**
 	 * <p><b>conexao</b>:</p>
@@ -85,6 +103,15 @@ public class PostgreSQL {
 	 */
 	private ResultSet rs;
 	
+	/**
+	 * <p><b>config</b></p>
+	 * <ul>
+	 * <li>Objeto para obter as configurações a partir de um arquivo.</li>
+	 * <li>Tipo: Config</li>
+	 * </ul>
+	 */
+	private Config config;
+	
 	
     ///////////////////////////////////////////////////
 	// Construtor(es)
@@ -92,14 +119,18 @@ public class PostgreSQL {
 	
 	/**
 	 * <p>O construtor para a classe PostgreSQL não recebe nenhum argumento, apenas
-	 * atribui valores previamente estabelecidos às variáveis da classe.</p>
-	 * 
-	 * TODO: ler esses valores a partir de arquivo "ini" (não sei fazer isso)
+	 * lê as configurações relativas ao banco de dados a partir de um arquivo de configurações
+	 * (através da Classe Config) e atribui as variáveis correspondentes.</p>
 	 */
 	public PostgreSQL() {
-		this.caminho = "/home/abrantesasf/repositoriosGit/algoritmos/faesa_algoritmos_2/eclipseWorkspace/SisBib/lib/";
-		this.driver = "org.postgresql.Driver";
-		this.url = "jdbc:postgresql://localhost:5432/vdiesel";
+		// Lê o arquivo de configuração do sistema e pega os valores referentes ao
+		// banco de dados:
+		this.config    = new Config();
+		this.dbLibPath = config.getDbLibPath();
+		this.dbDriver  = config.getDbDriver();
+		this.dbUrl     = config.getDbUrl();
+		this.dbLingua  = config.getDbLingua();
+		this.dbPais    = config.getDbPais();
 	}
 	
 	
@@ -119,8 +150,8 @@ public class PostgreSQL {
 	public boolean abrirConexao(String usuario, String senha) {
 		boolean resposta = false;
 		try {
-			Class.forName(driver);
-			this.conexao = DriverManager.getConnection(this.url, usuario, senha);
+			Class.forName(dbDriver);
+			this.conexao = DriverManager.getConnection(this.dbUrl, usuario, senha);
 			resposta = true;
 		} catch (ClassNotFoundException e) {
 			System.out.println("ERRO! Driver do banco de dados não encontrado.\n" +
