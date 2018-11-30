@@ -52,8 +52,9 @@ public class Validacoes {
 	 * <p><b>sdfDDMMAAAA</b></p>
 	 * <p>Variáveis para formatação de data, de diversas maneiras.</p>
 	 */
-	private Date data;
-	private SimpleDateFormat sdfDDMMAAAA;
+	private Date             data        = null;
+	private SimpleDateFormat sdfDDMMAAAA = null;
+
 	
     ///////////////////////////////////////////////////
 	// Construtor(es)
@@ -72,7 +73,8 @@ public class Validacoes {
 		this.local  = new Locale(this.lingua, this.pais);
 		
 		// Formato para datas conforme especificação do SisBib:
-		this.sdfDDMMAAAA = new SimpleDateFormat("dd/MM/YYYY", local);
+		this.sdfDDMMAAAA = new SimpleDateFormat("dd/MM/yyyy", local);
+		this.sdfDDMMAAAA.setLenient(false);
 	}
 	
 	///////////////////////////////////////////////////
@@ -106,14 +108,12 @@ public class Validacoes {
 	 * @return <b>True</b>, se a String corresponder a uma data válida<br /><b>False</b>, se a String não corresponder a uma data válida
 	 */
 	public boolean validaData(String data) {
-		boolean resposta = false;
 		try {
 			this.sdfDDMMAAAA.parse(data);
-			resposta = true;
+			return true;
 		} catch (Exception e) {
-			resposta = false;
+			return false;
 		}
-		return resposta;
 	}
 
 } // Fecha Classe Validacoes
