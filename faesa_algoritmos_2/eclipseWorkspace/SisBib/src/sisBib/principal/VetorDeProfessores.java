@@ -65,7 +65,7 @@ public class VetorDeProfessores {
 	 * @param i (int indicando a posição do vetor a ser retornada)
 	 * @return Professor (Professor)
 	 */
-	public Usuario getUsuario(int i) {
+	public Professor getProfessor(int i) {
 		return this.vProfessores[i];
 	}
 
@@ -76,7 +76,7 @@ public class VetorDeProfessores {
 	 * 
 	 * @return int (inteiro que representa a quantidade de objetos atualmente no vetor)
 	 */
-	private int getQtdNoVetor() {
+	public int getQtdNoVetor() {
 		return this.qtdNoVetor;
 	}
 	
@@ -87,7 +87,7 @@ public class VetorDeProfessores {
 	 * 
 	 * @return int (inteiro que representa a quantidade de posições que o vetor tem)
 	 */
-	private int getTamanhoDoVetor() {
+	public int getTamanhoDoVetor() {
 		return this.vProfessores.length;
 	}
 	
@@ -170,7 +170,7 @@ public class VetorDeProfessores {
 	public String toString() {
 		String resposta = "";
 		for (int i = 0; i < this.qtdNoVetor; i++) {
-			resposta += this.vProfessores[i].toString();
+			resposta += this.vProfessores[i].toString() + "\n\n";
 		}
 		return resposta;
 	}

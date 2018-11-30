@@ -34,7 +34,9 @@ public class TestaArquivos {
 		
 		System.out.println("\n\n Método NOVO:");
 		try {
-			csv.lerFuncionariosCSV2("/home/abrantesasf/professor.csv", 'p', profs);
+			if(!csv.lerCSVprofessores("/home/abrantesasf/professor.csv", profs)) {
+				System.out.println(csv.getMensagem());
+			}
 		} catch (Exception e) {
 			System.out.println("ERRO");
 		}
