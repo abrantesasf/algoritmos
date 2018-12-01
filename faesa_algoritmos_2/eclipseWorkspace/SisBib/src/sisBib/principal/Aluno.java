@@ -57,14 +57,15 @@ public class Aluno extends Usuario {
 	 * @param endereco (String)
 	 * @param dataString (String no formato DD/MM/AAAA)
 	 * @param curso (String)
+	 * @param multa (double)
 	 */
-	public Aluno(int matricula, String nome, String endereco, String dataString, String curso) {
+	public Aluno(int matricula, String nome, String endereco, String curso, String dataString, double multa) {
 		// Chama construtor da classe Usuario:
 		super(matricula, nome, endereco, dataString);
 		
 		// Atribui o valor às variáveis curso e multa:
 		this.curso = curso;
-		this.multa = 0.0;
+		this.multa = multa;
 	}
 
 
@@ -150,7 +151,7 @@ public class Aluno extends Usuario {
 	public String toString() {
 		String infoStud = "";
 		infoStud += super.toString()     + "\n" +
-		            "Curso:            " + "\n" +
+		            "Curso:            " + this.curso + "\n" +
 				    "Multa:            " + this.multa;
 		return infoStud;
 	}	

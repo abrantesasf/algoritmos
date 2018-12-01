@@ -2,7 +2,6 @@ package sisBib.util;
 
 // Importação de bibliotecas
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import sisBib.util.Config;
 
@@ -52,7 +51,6 @@ public class Validacoes {
 	 * <p><b>sdfDDMMAAAA</b></p>
 	 * <p>Variáveis para formatação de data, de diversas maneiras.</p>
 	 */
-	private Date             data        = null;
 	private SimpleDateFormat sdfDDMMAAAA = null;
 
 	
@@ -113,6 +111,33 @@ public class Validacoes {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+	
+	/**
+	 * <p><b>removeCaractereDeString(String texto, String caractere)</b></p>
+	 * <p>Este método pega uma String qualquer de texto e remove ocorrências do caractere passado
+	 * como parâmetro. Esse método foi pensado para ser utilizado
+	 * durante a gravação de um arquivo CSV, para a remoção de caracteres que podem
+	 * ser confundidos com o delimitador do CSV.</p>
+	 */
+	public String removeCaractereDeString(String texto, String caractere) {
+		String resposta = texto;
+		resposta = resposta.replace(caractere, "");
+		return resposta;
+	}
+	
+	/**
+	 * <p><b>checaMulta(double multa)</b></p>
+	 * <p>Verifica se o valor da multa está dentro do estabelecido pelo SisBib.</p>
+	 * @param multa (double)
+	 * @return <b>True</b>, se a multa está OK<br /><b>False</b>, se a multa está fora dos parâmetros
+	 */
+	public boolean checaMulta(double multa) {
+		if (multa < 0) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 
