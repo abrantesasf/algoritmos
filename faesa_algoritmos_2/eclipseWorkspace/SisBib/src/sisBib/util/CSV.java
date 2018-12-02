@@ -329,13 +329,13 @@ public class CSV {
 	}
 	
 	/**
-	 * <p><b>lerCSVprofessores(String arquivo, VetorDeProfessores vProfs)</b></p>
-	 * <p>Lê um arquivo CSV contendo dados dos professores,
+	 * <p><b>lerCSValunos(String arquivo, VetorDeAlunos vAlunos)</b></p>
+	 * <p>Lê um arquivo CSV contendo dados dos alunos,
 	 * conforme a especificação do SisBib. Se ocorrer algum problema durante o processamento
-	 * deste método, os dados do arquivo CSV não são retornados ao vetor vProfs.</p>
+	 * deste método, os dados do arquivo CSV não são retornados ao vetor vAlunos.</p>
 	 * 
 	 * @param arquivo (String representando o path para um arquivo CSV)
-	 * @param vProfs (Vetor de Professores que receberá os dados lidos do arquivo CSV)
+	 * @param vAlunos (Vetor de Alunos que receberá os dados lidos do arquivo CSV)
 	 * @return <b>True</b>, se o método foi executado com sucesso<br /><b>False</b>, se o método não foi executado com sucesso
 	 */
 	public boolean lerCSValunos(String arquivo, VetorDeAlunos vAlunos) throws IOException {
