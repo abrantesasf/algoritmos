@@ -45,6 +45,8 @@ public class Acervo {
 	 * <ul>
 	 * <li>L = livro</li>
 	 * <li>P = periódico</li>
+	 * <li>C = conferência</li>
+	 * <li>R = revista</li>
 	 * </ul> 
 	 */
 	private char tipo;
@@ -197,6 +199,14 @@ public class Acervo {
 			break;
 		case 'P':
 			// O item é um periódico
+			resposta = true;
+			break;
+		case 'C':
+			// O item é um relatório de conferência
+			resposta = true;
+			break;
+		case 'R':
+			// O item é uma revista
 			resposta = true;
 			break;
 		default:
