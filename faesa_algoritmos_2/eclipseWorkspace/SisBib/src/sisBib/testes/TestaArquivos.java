@@ -14,6 +14,7 @@ public class TestaArquivos {
 		CSV csv = new CSV();
 		Validacoes validacoes = new Validacoes();
 		VetorDeProfessores profs = new VetorDeProfessores(100);
+		
 		VetorDeAlunos alunos = new VetorDeAlunos(arq.contarLinhas("/home/abrantesasf/alunos.csv") + 100);
 		
 		

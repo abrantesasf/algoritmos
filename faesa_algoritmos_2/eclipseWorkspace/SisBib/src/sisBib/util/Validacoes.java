@@ -140,5 +140,21 @@ public class Validacoes {
 			return true;
 		}
 	}
+	
+	/**
+	 * <p><b>validaCodigo(int codigo)</b></p>
+	 * <p>Checa se o valor do código de um item do acervo está entre o mínimo (1)
+	 * e o máximo permitido (99999999), conforme especificação do sistema.</p>
+	 * 
+	 * @param codigo (int entre 1 e 99999999)
+	 * @return <b>True</b>, se o código está dentro dos limites<br /><b>False</b>, se o código está fora dos limites
+	 */
+	public boolean validaCodigo(int codigo) {
+		if ((codigo >= 1) & (codigo <= 99999999)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 } // Fecha Classe Validacoes
