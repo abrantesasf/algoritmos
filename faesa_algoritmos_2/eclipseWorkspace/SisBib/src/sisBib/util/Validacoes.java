@@ -2,6 +2,7 @@ package sisBib.util;
 
 // Importação de bibliotecas
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 import sisBib.util.Config;
 
@@ -155,6 +156,41 @@ public class Validacoes {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean validaAno(int ano) {
+		if ((ano >= 1800) & (ano <= Calendar.getInstance().get(Calendar.YEAR))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean validaTipo(char tipo) {
+		boolean resposta;
+		switch (tipo) {
+		case 'L':
+			// O item é um Livro
+			resposta = true;
+			break;
+		case 'P':
+			// O item é um periódico
+			resposta = true;
+			break;
+		case 'C':
+			// O item é um relatório de conferência
+			resposta = true;
+			break;
+		case 'R':
+			// O item é uma revista
+			resposta = true;
+			break;
+		default:
+			// O item é outra coisa não permitida
+			resposta = false;
+			break;
+		}
+		return resposta;
 	}
 
 } // Fecha Classe Validacoes

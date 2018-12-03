@@ -2,6 +2,8 @@ package sisBib.db;
 
 //Importação de bibliotecas:
 import java.sql.*;
+import java.util.Properties;
+
 import sisBib.util.Config;
 
 /**
@@ -31,49 +33,39 @@ public class PostgreSQL {
 	///////////////////////////////////////////////////
 	
 	/**
-	 * <p><b>dbDriver</b>:</p>
+	 * <p><b>dbLibPath, dbDriver, dbUrl, dbSSL, dbSSLmode, dbSSLfactory, dbUser, dbPassword, dbSSLcert,
+	 * dbSSLkey, dbSSLca, dbLingua, dbPais</b>:</p>
 	 * <ul>
-	 * <li>Driver JDBC a ser utilizado</li>
+	 * <li>Variáveis que armazenam configurações relativas ao banco de dados,
+	 *     conforme o arquivo de configuração.</li>
 	 * <li>Tipo: String</li>
 	 * </ul>
 	 */
-	private String dbDriver = "";
+	@SuppressWarnings("unused")
+	private String dbLibPath    = "";
+	private String dbDriver     = "";
+	private String dbUrl        = "";
+	private String dbSSL        = "";
+	private String dbSSLmode    = "";
+	private String dbSSLfactory = "";
+	private String dbUser       = "";
+	private String dbPassword   = "";
+	private String dbSSLcert    = "";
+	private String dbSSLkey     = "";
+	private String dbSSLca      = "";
+	@SuppressWarnings("unused")
+	private String dbLingua     = "";
+	@SuppressWarnings("unused")
+	private String dbPais       = "";
 	
 	/**
-	 * <p><b>dbLibPath</b>:</p>
+	 * <p><b>props</b>:</p>
 	 * <ul>
-	 * <li>Path do driver JDBC a ser utilizado</li>
-	 * <li>Tipo: String</li>
+	 * <li>Objeto Properties para armazenar diversos parâmetros da conexão ao banco de dados.</li>
+	 * <li>Tipo: Properties</li>
 	 * </ul>
 	 */
-	private String dbLibPath = "";
-	
-	/**
-	 * <p><b>dbUrl</b>:</p>
-	 * <ul>
-	 * <li>URL (uniform resourse locator) para a conexão do banco de dados</li>
-	 * <li>Tipo: String</li>
-	 * </ul>
-	 */
-	private String dbUrl = "";
-	
-	/**
-	 * <p><b>dbLingua</b>:</p>
-	 * <ul>
-	 * <li>Configuração de linguagem a ser utilizada no banco de dados</li>
-	 * <li>Tipo: String</li>
-	 * </ul>
-	 */
-	private String dbLingua = "";
-	
-	/**
-	 * <p><b>dbPais</b>:</p>
-	 * <ul>
-	 * <li>Configuração de país a ser utilizada no banco de dados</li>
-	 * <li>Tipo: String</li>
-	 * </ul>
-	 */
-	private String dbPais = "";
+	private Properties props = new Properties();
 	
 	/**
 	 * <p><b>conexao</b>:</p>
@@ -125,12 +117,20 @@ public class PostgreSQL {
 	public PostgreSQL() {
 		// Lê o arquivo de configuração do sistema e pega os valores referentes ao
 		// banco de dados:
-		this.config    = new Config();
-		this.dbLibPath = config.getDbLibPath();
-		this.dbDriver  = config.getDbDriver();
-		this.dbUrl     = config.getDbUrl();
-		this.dbLingua  = config.getDbLingua();
-		this.dbPais    = config.getDbPais();
+		this.config       = new Config();
+		this.dbLibPath    = config.getDbLibPath();
+		this.dbDriver     = config.getDbDriver();
+		this.dbUrl        = config.getDbUrl();
+		this.dbSSL        = config.getDbSSL();
+		this.dbSSLmode    = config.getDbSSLmode();
+		this.dbSSLfactory = config.getDbSSLfactory();
+		this.dbUser       = config.getDbUser();
+		this.dbPassword   = config.getDbPassword();
+		this.dbSSLcert    = config.getDbSSLcert();
+		this.dbSSLkey     = config.getDbSSLkey();
+		this.dbSSLca      = config.getDbSSLca();
+		this.dbLingua     = config.getDbLingua();
+		this.dbPais       = config.getDbPais();
 	}
 	
 	
@@ -150,9 +150,34 @@ public class PostgreSQL {
 	public boolean abrirConexao(String usuario, String senha) {
 		boolean resposta = false;
 		try {
+			// Cria propriedades:
+			if (usuario != null) {
+				props.setProperty("user", usuario);
+			} else {
+				props.setProperty("user", this.dbUser);
+			}
+			if (senha != null) {
+				props.setProperty("password", senha);
+			} else {
+				props.setProperty("password", this.dbPassword);
+			}
+			props.setProperty("ssl", this.dbSSL);
+			props.setProperty("sslmode", this.dbSSLmode);
+			props.setProperty("sslcert", this.dbSSLcert);
+			props.setProperty("sslkey", this.dbSSLkey);
+			props.setProperty("sslrootcert", this.dbSSLca);
+			props.setProperty("sslfactory", this.dbSSLfactory);
+			
+			// Instancia driver (opcional):
 			Class.forName(dbDriver);
-			this.conexao = DriverManager.getConnection(this.dbUrl, usuario, senha);
+			
+			// Abre conexão com o banco de dados:
+			this.conexao = DriverManager.getConnection(this.dbUrl, props);
+			
+			// Se tudo OK, retorna true:
 			resposta = true;
+		
+		// Se deu algum xabu:
 		} catch (ClassNotFoundException e) {
 			System.out.println("ERRO! Driver do banco de dados não encontrado.\n" +
 		                       e.toString());
@@ -160,6 +185,7 @@ public class PostgreSQL {
 			System.out.println("ERRO! Problemas na conexão ao banco de dados.\n" +
 		                       e.toString());
 		}
+		
 		return resposta;
 	}
 	

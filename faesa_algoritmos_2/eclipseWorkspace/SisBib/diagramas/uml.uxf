@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text/>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>300</y>
+      <w>310</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>CSV
+--
+- scan: Scanner
+- scanDados: Scanner
+- indice: int
+- matricula: int
+- nome: String
+- endereco: String
+- data: String
+- novoUsuario: Usuario
+--
+# CSV()
+--
++ lerCSVfuncionarios(String arquivo): void
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>40</y>
+      <w>400</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>PostgreSQL
+--
+- dbDriver: String
+- dbLibPath: String
+- dbURL: String
+- dbLingua: String
+- dbPais: String
+- conexao: Connection
+- query: PreparedStatement
+- rs: ResultSet
+- config: Config
+--
+#PostgreSQL()
+--
++ abrirConexao(String usuario, String senha): boolean
+- usarConexao(): Connection
++ conexaoExiste(): boolean
++ conexaoEstaAtiva(): boolean
++ fecharConexao(): boolean
++ conexaoEstaFechada(): boolean
++ prepararQuery(String sql): void
++ usarQuery(): PreparedStatement
++ executarQuery(): void
++ resultadosDaQuery(): ResultSet
++ terminaQuery(): void
+
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>30</y>
+      <w>210</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>Config
+--
+- config: Properties
+- input: InputStream
+- arq: Arquivos
+- sepDir: String
+- configPath: String
+- dbLibPath: String
+- dbDriver: String
+- dbUrl: String
+- dbLingua: String
+- dbPais: String
+- lingua: String
+- pais: String
+--
+# Config()
+--
++ getDbLibPath(): String
++ getDbDriver(): String
++ getDbUrl(): String
++ getDbLingua(): String
++ getDbPais(): String
++ getLingua(): String
++ getPais(): String
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>30</y>
+      <w>420</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Datas
+--
+- config: Config
+- lingua: String
+- pais: String
+- local: Locale
+- dataCompleta: SimpleDateFormat
+- dataCompletaComDiaDaSemana: SimpleDateFormat
+- dataDDMMAA: SimpleDateFormat
+- dataDDMMAAAA: SimpleDateFormat
+- hora24: SimpleDateFormat
+- hora12: SimpleDateFormat
+--
+# Datas()
+--
++ fmtDataCompleta(Date data): String
++ fmtDataCompletaComDiaDaSemana(Date data): String
++ fmtDataDDMMAA(Date data): String
++ fmtDataDDMMAAAA(Date data): String
++ fmtHora24(Date data): String
++ fmtHora12(Date data): String
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>30</y>
+      <w>310</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Arquivos
+--
+- path: Path
+- separadorDeArquivosString: String
+- separadorDeArquivosChar: char
+- separadorDeDiretoriosString: String
+- separadorDeDiretoriosChar: char
+--
+# Arquivos()
+--
++ arquivoExiste(String path): boolean
++ diretorioExiste(String path): boolean
++ contarLinhas(String arquivo): int
++ separadorDeArquivosS(): String
++ separadorDeArquivosC(): char
++ separadorDeDiretoriosS(): String
++ separadorDeDiretoriosC(): char
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1030</x>
+      <y>0</y>
+      <w>440</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>sisBib.db
+--
+bg=orange
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>1010</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>sisBib.util
+--
+bg=green
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>530</y>
+      <w>990</w>
+      <h>740</h>
+    </coordinates>
+    <panel_attributes>sisBib.principal
+--
+bg=red
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>360</y>
+      <w>420</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>TextUtils
+--
+--
+# TextUtils()
+--
++ buscaS1emS2(String string1, String string2): boolean
+layer=1
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>560</y>
+      <w>360</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>Usuario
+--
+- matricula: int
+- nome: String
+- endereco: String
+- dataString: String
+- data: Date
+- sdf: SimpleDateFormat
+--
+# Usuario (int matricula,
+                 String nome,
+                 String endereco,
+                 String dataString)
+--
++ getMatricula(): int
++ getNome(): String
++ getEndereco(): String
++ getDataString(): String
++ getData(): Date
++ checaLimitesMatricula(int matricula): boolean
++ setMatricula(int matricula): void
++ setNome(String nome): void
++ setEndereco(String endereco): void
++ setDataString(String dataString): void
++ setData(String dataString): void
++ toString(): String
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>1000</y>
+      <w>340</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Aluno
+--
+- curso: String
+- multa: double
+--
+# Aluno (int matricula,
+              String nome,
+              String endereco,
+              String dataString,
+              String curso)
+--
++ getCurso(): String
++ getMulta(): double
++ setCurso(String curso): void
++ checaMultaNegativa(Double multa): boolean
++ setMulta(Double multa): void
++ toString(): String
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>950</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>1000</y>
+      <w>230</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Professor
+--
+- setor: String
+--
+# Professor (int matricula,
+                    String nome,
+                    String endereco,
+                    String dataString,
+                    String setor)
+--
++ getSetor(): String
++ setSetor(String setor): void
++ toString(): String
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>950</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>560</y>
+      <w>350</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>VetorDeUsuarios
+--
+- vUsuarios: Usuario[]
+- qtdNoVetor: int
+--
+# VetorDeUsuarios (int tamanho)
+--
++ getUsuario(int i): Usuario
+- getQtdNoVetor(): int
+- getTamanhoDoVetor(): int
++ matriculaExiste(int matricula): boolean
++ posicaoNoVetor(int matricula): int
+- vetorCheio(): boolean
+- vetorVazio(): boolean
++ toString(): String
++ inserirUsuario(Usuario novoUsuario): boolean
++ removerUsuario(int i): boolean
+layer=1
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="biblioteca" id="Project_1efb295" template="Default" database="PostgreSQL" >
+	<comment><![CDATA[DER para o trabalho de Algoritmo II]]></comment>
+	<schema name="sisbib" catalogname="sisbib" schemaname="sisbib" >
+		<table name="alunos" >
+			<comment><![CDATA[Cadastro dos alunos do SisBib]]></comment>
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, matrícula dos alunos]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do aluno]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" mandatory="y" >
+				<comment><![CDATA[Endreço completo do aluno (logradouro + número + complemento + bairro + cidade + UF + CEP)]]></comment>
+			</column>
+			<column name="data" type="date" jt="91" mandatory="y" >
+				<comment><![CDATA[Data de ingresso do aluno]]></comment>
+			</column>
+			<column name="codigo_curso" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela cursos (por padrão, um aluno pode estar matriculado em 0 ou 1 curso)]]></comment>
+			</column>
+			<index name="pk_alunos" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_alunos_codigo_curso" unique="NORMAL" >
+				<column name="codigo_curso" />
+			</index>
+			<constraint name="cc_alunos_matricula" >
+				<string>(matricula &gt;= 1 AND matricula &lt;= 99999999)</string>
+				<comment><![CDATA[Checa se a matrícula está entre 1 e 99.999.999]]></comment>
+			</constraint>
+			<fk name="fk_alunos_cursos" to_schema="sisbib" to_table="cursos" >
+				<fk_column name="codigo_curso" pk="codigo" />
+				<comment><![CDATA[FK para a tabela cursos (1 aluno pode estar em 0 ou 1 curso)]]></comment>
+			</fk>
+		</table>
+		<table name="cursos" >
+			<comment><![CDATA[Cadastro dos cursos dos alunos]]></comment>
+			<column name="codigo" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, código dos cursos]]></comment>
+			</column>
+			<column name="curso" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do curso]]></comment>
+			</column>
+			<index name="pk_cursos" unique="PRIMARY_KEY" >
+				<column name="codigo" />
+			</index>
+		</table>
+		<table name="funcionarios" >
+			<comment><![CDATA[Cadastro de funcionários]]></comment>
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, matrícula do funcionário]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do funcionário]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" mandatory="y" >
+				<comment><![CDATA[Endereço completo do funcionário (logradouro + número + complemento + bairro + cidade + UF + CEP)]]></comment>
+			</column>
+			<column name="data" type="date" jt="91" mandatory="y" >
+				<comment><![CDATA[Data de ingresso do funcionário]]></comment>
+			</column>
+			<column name="codigo_setor" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela setores, para indicar o setor associado ao funcionário (por padrão, um funcionário pode estar associado a 0 ou 1 setor)]]></comment>
+			</column>
+			<column name="login" type="varchar" length="50" jt="12" mandatory="y" >
+				<comment><![CDATA[Login do funcionário para acesso ao SisBib]]></comment>
+			</column>
+			<column name="senha" type="varchar" length="20" jt="12" mandatory="y" >
+				<comment><![CDATA[Senha do funcionário paa acesso ao SisBib]]></comment>
+			</column>
+			<index name="pk_funcionarios" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_funcionarios_codigo_setor" unique="NORMAL" >
+				<column name="codigo_setor" />
+			</index>
+			<constraint name="cc_funcionarios_matricula" >
+				<string>(matricula &gt;= 1 AND matricula &lt;= 99999999)</string>
+				<comment><![CDATA[Verifica se a matrícula está entre 1 e 99.999.999]]></comment>
+			</constraint>
+			<fk name="fk_funcionarios_setores" to_schema="sisbib" to_table="setores" >
+				<fk_column name="codigo_setor" pk="codigo" />
+			</fk>
+		</table>
+		<table name="professores" >
+			<comment><![CDATA[Cadastro dos professores]]></comment>
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, matrícula dos professores]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do professor]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" mandatory="y" >
+				<comment><![CDATA[Endereço completo do professor (logradouro + número + complemento + bairro + cidade + UF + CEP)]]></comment>
+			</column>
+			<column name="data" type="date" jt="91" mandatory="y" >
+				<comment><![CDATA[Data de ingresso do professor]]></comment>
+			</column>
+			<column name="codigo_setor" type="integer" jt="4" >
+				<comment><![CDATA[FK para a tabela setores (por padrão, um professor pode pertencer a 0 ou 1 setor)]]></comment>
+			</column>
+			<index name="pk_professores" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_professores_codigo_setor" unique="NORMAL" >
+				<column name="codigo_setor" />
+			</index>
+			<constraint name="cc_professores_matricula" >
+				<string>(matricula &gt;= 1 AND matricula &lt;= 99999999)</string>
+				<comment><![CDATA[Verifica se a matrícula está entre 1 e 99.999.999]]></comment>
+			</constraint>
+			<fk name="fk_professores_setores" to_schema="sisbib" to_table="setores" >
+				<fk_column name="codigo_setor" pk="codigo" />
+				<comment><![CDATA[FK para a tabela setores (por padrão, um professor pode estar associado a 0 ou 1 setor)]]></comment>
+			</fk>
+		</table>
+		<table name="setores" >
+			<comment><![CDATA[Cadastro dos setores dos professores]]></comment>
+			<column name="codigo" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, código de cada setor]]></comment>
+			</column>
+			<column name="setor" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do setor]]></comment>
+			</column>
+			<index name="pk_setor" unique="PRIMARY_KEY" >
+				<column name="codigo" />
+			</index>
+		</table>
+		<table name="tarefas" >
+			<comment><![CDATA[Teste do Hibernate]]></comment>
+			<column name="id" type="serial" jt="4" mandatory="y" />
+			<column name="descricao" type="varchar" length="300" jt="12" mandatory="y" />
+			<column name="finalizado" type="bool" jt="-7" />
+			<column name="data" type="date" jt="91" mandatory="y" />
+			<index name="pk_tarefas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="usuarios" >
+			<comment><![CDATA[Cadastro dos usuarios do SisBib]]></comment>
+			<column name="matricula" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[PK da tabela, matrícula dos usuários]]></comment>
+			</column>
+			<column name="nome" type="varchar" length="250" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[Nome do usuário]]></comment>
+			</column>
+			<column name="endereco" type="varchar" length="500" jt="12" mandatory="y" >
+				<comment><![CDATA[Endereço completo do usuário (logradouro + número + complemento + bairro + cidade + UF + CEP)]]></comment>
+			</column>
+			<column name="data" type="date" length="13" decimal="0" jt="91" mandatory="y" >
+				<comment><![CDATA[Data de ingresso do usuário]]></comment>
+			</column>
+			<index name="pk_usuarios" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<index name="idx_usuarios_nome" unique="NORMAL" >
+				<column name="nome" />
+			</index>
+			<constraint name="cc_usuarios_matricula" >
+				<string>(matricula &gt;= 1) AND (matricula &lt;= 99999999)</string>
+				<comment><![CDATA[Checa se a matrícula vai de 1 ao máximo de 99.999.999]]></comment>
+			</constraint>
+		</table>
+	</schema>
+	<connector name="DBA SisBibOnline" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.5.jar" driver_desc="Standard" host="localhost" port="5432" instance="sisbib" user="dbasisbib" sshEnable="true" sshHost="pgsql.endoscopia.vix.br" sshPort="22" sshUser="centos" sshUseKey="true" sshPublicKey="/home/abrantesasf/.ssh/chave_abrantes_ssh.key" />
+	<connector name="SisBibOnline" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.5.jar" driver_desc="Standard" host="localhost" port="5432" instance="sisbib" user="sisbib" sshEnable="true" sshHost="pgsql.endoscopia.vix.br" sshPort="22" sshUser="centos" sshUseKey="true" sshPublicKey="/home/abrantesasf/.ssh/chave_abrantes_ssh.key" />
+	<layout name="Geral" id="Layout_ebb10b" joined_routing="y" show_column_type="y" show_relation="no_text" >
+		<entity schema="sisbib" name="setores" color="C1D8EE" x="560" y="240" />
+		<entity schema="sisbib" name="funcionarios" color="C1D8EE" x="800" y="224" />
+		<entity schema="sisbib" name="professores" color="C1D8EE" x="800" y="400" />
+		<entity schema="sisbib" name="usuarios" color="3986C1" x="48" y="64" />
+		<entity schema="sisbib" name="tarefas" color="C1D8EE" x="256" y="304" />
+		<entity schema="sisbib" name="alunos" color="C1D8EE" x="304" y="64" />
+		<entity schema="sisbib" name="cursos" color="C1D8EE" x="608" y="48" />
+		<script name="Sql_Editor" id="Editor_598697" language="SQL" >
+			<string><![CDATA[GRANT  SELECT, INSERT, UPDATE, DELETE ON sisbib.tarefas TO sisbib;]]></string>
+		</script>
+		<browser id="Browse_410a07d" name="cursos" confirm_updates="y" >
+			<browse_table schema="sisbib" entity="cursos" x="20" y="20" width="400" height="300" />
+		</browser>
+	</layout>
+</project>

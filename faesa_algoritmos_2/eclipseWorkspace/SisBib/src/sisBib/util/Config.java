@@ -72,18 +72,27 @@ public class Config {
 	private String configPath = "config" + sepDir + "config.ini";
 	
 	/**
-	 * <p><b>dbLibPath, dbDriver, dbUrl, dbLingua, dbPais</b>:</p>
+	 * <p><b>dbLibPath, dbDriver, dbUrl, dbSSL, dbSSLmode, dbSSLfactory, dbUser, dbPassword, dbSSLcert,
+	 * dbSSLkey, dbSSLca, dbLingua, dbPais</b>:</p>
 	 * <ul>
 	 * <li>Variáveis que armazenam configurações relativas ao banco de dados,
 	 *     conforme o arquivo de configuração.</li>
 	 * <li>Tipo: String</li>
 	 * </ul>
 	 */
-	private String dbLibPath = "";
-	private String dbDriver  = "";
-	private String dbUrl     = "";
-	private String dbLingua  = "";
-	private String dbPais    = "";
+	private String dbLibPath    = "";
+	private String dbDriver     = "";
+	private String dbUrl        = "";
+	private String dbSSL        = "";
+	private String dbSSLmode    = "";
+	private String dbSSLfactory = "";
+	private String dbUser       = "";
+	private String dbPassword   = "";
+	private String dbSSLcert    = "";
+	private String dbSSLkey     = "";
+	private String dbSSLca      = "";
+	private String dbLingua     = "";
+	private String dbPais       = "";
 	
 	/**
 	 * <p><b>lingua, pais</b>:</p>
@@ -114,11 +123,19 @@ public class Config {
 			config.load(input);
 			
 			// Pega configurações do banco de dados
-			this.dbLibPath = config.getProperty("dbLibPath");
-			this.dbDriver  = config.getProperty("dbDriver");
-			this.dbUrl     = config.getProperty("dbUrl");
-			this.dbLingua  = config.getProperty("dbLingua");
-			this.dbPais    = config.getProperty("dbPais");
+			this.dbLibPath    = config.getProperty("dbLibPath");
+			this.dbDriver     = config.getProperty("dbDriver");
+			this.dbUrl        = config.getProperty("dbUrl");
+			this.dbSSL        = config.getProperty("dbSSL");
+			this.dbSSLmode    = config.getProperty("dbSSLmode");
+			this.dbSSLfactory = config.getProperty("dbSSLfactory");
+			this.dbUser       = config.getProperty("dbUser");
+			this.dbPassword   = config.getProperty("dbPassword");
+			this.dbSSLcert    = config.getProperty("dbSSLcert");
+			this.dbSSLkey     = config.getProperty("dbSSLkey");
+			this.dbSSLca      = config.getProperty("dbSSLca");
+			this.dbLingua     = config.getProperty("dbLingua");
+			this.dbPais       = config.getProperty("dbPais");
 			
 			// Pega configuraçẽos de i10n e i18n
 			this.lingua = config.getProperty("lingua");
@@ -172,6 +189,79 @@ public class Config {
 	 */
 	public String getDbUrl() {
 		return this.dbUrl;
+	}
+	
+	/**
+	 * <p><b>getDbSSL()</b></p>
+	 * <p>Retorna o parâmetro que habilita a conexão SSL.</p>
+	 * @return dbSSL (String)
+	 */
+	public String getDbSSL() {
+		return this.dbSSL;
+	}
+	
+	/**
+	 * <p><b>getDbSSLmode()</b></p>
+	 * <p>Retorna o parâmetro do mode de verificação do certificado.</p>
+	 * @return dbSSLmode (String)
+	 */
+	public String getDbSSLmode() {
+		return this.dbSSLmode;
+	}
+	
+	/**
+	 * <p><b>getDbSSLfactory()</b></p>
+	 * <p>Retorna o parâmetro do factory de verificação do certificado.</p>
+	 * @return dbSSfactory (String)
+	 */
+	public String getDbSSLfactory() {
+		return this.dbSSLfactory;
+	}
+	
+	/**
+	 * <p><b>getDbUser()</b></p>
+	 * <p>Retorna o usuário para conexão ao banco de dados.</p>
+	 * @return dbUser (String)
+	 */
+	public String getDbUser() {
+		return this.dbUser;
+	}
+	
+	/**
+	 * <p><b>getDbPassword()</b></p>
+	 * <p>Retorna a senha do usuário para conexão ao banco de dados.</p>
+	 * @return dbPassword (String)
+	 */
+	public String getDbPassword() {
+		return this.dbPassword;
+	}
+	
+	/**
+	 * <p><b>getDbSSLcert()</b></p>
+	 * <p>Retorna o path para o arquivo de certificado SSL do usuário do banco de dados.</p>
+	 * @return dbSSLcert (String)
+	 */
+	public String getDbSSLcert() {
+		return this.dbSSLcert;
+	}
+	
+	/**
+	 * <p><b>getDbSSLkey()</b></p>
+	 * <p>Retorna o path para o arquivo de chave (em formato pk8) do certificado SSL do usuário do banco de dados.</p>
+	 * @return dbSSLkey (String)
+	 */
+	public String getDbSSLkey() {
+		return this.dbSSLkey;
+	}
+	
+	/**
+	 * <p><b>getDbSSLca()</b></p>
+	 * <p>Retorna o path para o arquivo de certificado da autoridade certificadora que emitiu os certificados
+	 * para o servidor e os usuários do banco de dados.</p>
+	 * @return dbSSLca (String)
+	 */
+	public String getDbSSLca() {
+		return this.dbSSLca;
 	}
 	
 	/**

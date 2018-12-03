@@ -57,7 +57,7 @@ public class Livro extends Acervo {
 	 * @param ano (int que representa um ano, com 4 dígitos)
 	 * @param isbn (String com o ISBN do livro)
 	 */
-	public Livro(int codigo, String autores, String titulo, char tipo, String editora, int ano, String isbn) {
+	public Livro(int codigo, String autores, String titulo, String editora, char tipo,  int ano, String isbn) {
 		// Usa o construtor da classe Acervo:
 		super(codigo, autores, titulo, tipo);
 		
