@@ -27,28 +27,32 @@ public class SisBib {
 	// Definições de atributos:
 	///////////////////////////////////////////////////
 	
-	private static Scanner            scan       = new Scanner(System.in);
-	private static Arquivos           arq        = new Arquivos();
-	private static CSV                csv        = new CSV();
-	private static Datas              fmtData    = new Datas();
-	private static TextUtils          textUtil   = new TextUtils();
-	private static Validacoes         validacoes = new Validacoes();
-	private static PostgreSQL         db         = new PostgreSQL();
-	private static String             sql        = "";
-	private static VetorDeUsuarios    usuarios;
-	private static VetorDeAlunos      alunos;
-	private static VetorDeProfessores professores;
-	private static VetorDeFuncionarios funcionarios;
-	private static VetorDeLivros      livros;
-	private static VetorDePeriodicos  periodicos;
-	private static VetorDeAcervo      acervo;
-	private static boolean            usuariosOK = false;
-	private static String             csvFuncionarios = "/home/abrantesasf/funcionarios.csv";
-	private static String             csvAlunos       = "/home/abrantesasf/alunos.csv";
-	private static String             csvProfessores  = "/home/abrantesasf/professores.csv";
-	private static String             csvLivros       = "/home/abrantesasf/livros.csv";
-	private static String             csvPeriodicos   = "/home/abrantesasf/periodicos.csv";
-	private static int                matFunc;
+	private static Scanner                  scan       = new Scanner(System.in);
+	private static Arquivos                 arq        = new Arquivos();
+	private static CSV                      csv        = new CSV();
+	private static Datas                    fmtData    = new Datas();
+	private static TextUtils                textUtil   = new TextUtils();
+	private static Validacoes               validacoes = new Validacoes();
+	private static PostgreSQL               db         = new PostgreSQL();
+	private static String                   sql        = "";
+	private static VetorDeUsuarios          usuarios;
+	private static VetorDeAlunos            alunos;
+	private static VetorDeProfessores       professores;
+	private static VetorDeFuncionarios      funcionarios;
+	private static VetorDeLivros            livros;
+	private static VetorDePeriodicos        periodicos;
+	private static VetorDeAcervo            acervo;
+	private static VetorDeEmprestimos       emprestimos;
+	private static VetorDeItensDeEmprestimo itens;
+	private static boolean                  usuariosOK = false;
+	private static String                   csvFuncionarios = "/home/abrantesasf/funcionarios.csv";
+	private static String                   csvAlunos       = "/home/abrantesasf/alunos.csv";
+	private static String                   csvProfessores  = "/home/abrantesasf/professores.csv";
+	private static String                   csvLivros       = "/home/abrantesasf/livros.csv";
+	private static String                   csvPeriodicos   = "/home/abrantesasf/periodicos.csv";
+	private static String                   csvEmprestimos  = "/home/abrantesasf/emprestimos.csv";
+	private static String                   csvItens        = "/home/abrantesasf/itens.csv";
+	private static int                      matFunc;
 	
 
 	/**
@@ -160,6 +164,33 @@ public class SisBib {
 			return;
 		}
 		
+		try {
+			emprestimos  = new VetorDeEmprestimos(arq.contarLinhas(csvEmprestimos) + 100);
+			try {
+				if (csv.lerCSVemprestimos(csvEmprestimos, emprestimos)) {
+				}
+			} catch (Exception e) {
+				System.out.println("Planilha corrompida");
+			}
+		} catch (Exception e) {
+			System.out.println("Não foi possível ler o arquivo de periódicos. O sistema não será iniciado.");
+			return;
+		}
+		
+		try {
+			itens = new VetorDeItensDeEmprestimo(arq.contarLinhas(csvItens) + 100);
+			try {
+				if (csv.lerCSVitensDeEmprestimos(csvItens, itens)) {
+				}
+			} catch (Exception e) {
+				System.out.println("Planilha corrompida");
+			}
+		} catch (Exception e) {
+			System.out.println("Não foi possível ler o arquivo de periódicos. O sistema não será iniciado.");
+			return;
+		}
+		
+		
 		System.out.println("\nUsuário identificado e arquivos de dados lidos! Bem-vindo!\n");
 		
 		int menu = 0;
@@ -169,10 +200,10 @@ public class SisBib {
 			System.out.println("--------------- MENU DE OPÇÕES ---------------\n" +
 		                       "1 - Cadastrar usuários ou itens\n" +
 					           "2 - Cadastrar empréstimos\n" +
-		                       //"3 - Devolução de empréstimos\n" +
+		                       "3 - Devolução de empréstimos\n" +
 					           "4 - Remover cadastro de usuários ou itens\n" +
 		                       "5 - Ver cadastros na tela\n" +
-					           //"8 - Demonstração do uso de um PostgreSQL remoto\n" +
+					           "8 - Demonstração do uso de um PostgreSQL remoto\n" +
 		                       "9 - Sair\n" +
 		                       "----------------------------------------------\n"+
 					           "Informe sua opção: ");
@@ -378,6 +409,80 @@ public class SisBib {
 					}
 				} while (submenu != 6);
 				break;
+			case 2:
+				System.out.println("Digite o código do Empréstimo:");
+				int codigoEmprestimo = scan.nextInt();
+				scan.nextLine();
+				
+				System.out.println("Digite o código do Cliente:");
+				int codigoCliente = scan.nextInt();
+				scan.nextLine();
+				
+				int codigoFuncionario = matFunc;
+				
+				System.out.println("Digite a data do empréstimo: ");
+				String dataEmprestimoString = scan.nextLine();
+				
+				System.out.println("Digite a data da devolução: ");
+				String dataDevolucaoString = scan.nextLine();
+				
+				int codigoItem = codigoEmprestimo + 123; // aleatório mesmo só para simplificar
+				
+				System.out.println("Digite o código do livro: ");
+				int codigoLivro = scan.nextInt();
+				scan.nextLine();
+				
+				System.out.println("Digite o código do periódico: ");
+				int codigoPeriodico = scan.nextInt();
+				scan.nextLine();
+				
+				Emprestimo novoEmprestimo = new Emprestimo(codigoEmprestimo, codigoCliente, codigoFuncionario, dataEmprestimoString, dataDevolucaoString);
+				ItemDeEmprestimo novoItemDeEmprestimo = new ItemDeEmprestimo(codigoItem, codigoEmprestimo, codigoLivro, codigoPeriodico, dataDevolucaoString);
+				if ( (emprestimos.inserirEmprestimo(novoEmprestimo)) & (itens.inserirItemDeEmprestimo(novoItemDeEmprestimo))) {
+					try {
+						csv.gravarCSVemprestimos(csvEmprestimos, emprestimos);
+						csv.gravarCSVitensDeEmprestimos(csvItens, itens);
+						System.out.println("Empréstimo inserido com sucesso!");
+					} catch (Exception e) {
+						System.out.println("Erro na gravação dos arquivos CSV de empréstimo e/ou itens.");
+					}
+				}
+				break;
+			case 3:
+				System.out.println("Digite o código do empréstimo que deseja fazer a devolução: ");
+				codigoEmprestimo = scan.nextInt();
+				scan.nextLine();
+				
+				System.out.println("Existe multa para o cliente (S ou N)?" );
+				char temMulta = scan.nextLine().charAt(0);
+				
+				if (temMulta == 'S') {
+					System.out.println("Informe o valor da multa: ");
+					double multa = scan.nextDouble();
+					scan.nextLine();
+					
+					codigoCliente = 0;
+					for (int i = 0; i < emprestimos.getQtdNoVetor(); i++) {
+						if (emprestimos.getEmprestimo(i).getCodigo() == codigoEmprestimo) {
+							codigoCliente = emprestimos.getEmprestimo(i).getMatriculaCliente();
+						}
+					}
+					
+					for (int i = 0; i < alunos.getQtdNoVetor(); i++) {
+						if (alunos.getAluno(i).getMatricula() == codigoCliente) {
+							alunos.getAluno(i).setMulta(multa);
+						}
+					}
+				}
+				
+				try {
+					csv.gravarCSValunos(csvAlunos, alunos);
+					System.out.println("Empréstimo devolvido com sucesso!");
+				} catch (Exception e) {
+					System.out.println("Erro na gravação dos arquivos CSV de empréstimo e/ou itens.");
+				}
+				
+				break;
 			case 4:
 				do {
 					System.out.println("Remover cadastro por matricula/código");
@@ -488,6 +593,44 @@ public class SisBib {
 					break;
 				}
 			} while (submenu != 9);
+				break;
+			case 8:
+				System.out.println("Esse menu é uma DEMONSTRAÇÃO ONLINE da conexão de nosso sistema de biblioteca baseado em arquivo");
+				System.out.println("à um banco de dados PostgreSQL 11.1, hospedado na Amazon AWS em um servidor Linux de um dos autores.");
+				System.out.println("A conexão é feita através de CERTIFICADOS SSL e VERIFICAÇÃO DE AUTORIDADE CERTIFICADORA, de modo que");
+				System.out.println("o servidor só aceite conexões de clientes previamente autorizadas e com um CERTIFICADO SSL válido.");
+				System.out.println("Do mesmo modo, o cliente só aceita se conectar ao servidor se o CERTIFICADO SSL do servidor estiver");
+				System.out.println("assinado e for confivável em sua cadeia de certificação.");
+				System.out.println(" ");
+				System.out.println("O objetivo dessa demonstração é apresentar um início de mapeamento OBJETO-RELACIONAL para o trabalho.");
+				System.out.println("Executando a query em PGSQL.ENDOSCOPIA.VIX.BR:");
+				
+				sql = "SELECT a.matricula, "
+						+ "       a.nome, "
+					    + "       a.data, "
+						+ "       c.curso "
+						+ "FROM sisbib.alunos a "
+						+ "INNER JOIN sisbib.cursos c ON (a.codigo_curso = c.codigo) "
+						+ "ORDER BY a.nome ";
+				
+				try {
+					db.prepararQuery(sql);
+					db.executarQuery();
+					int matricula;
+					String nome, data, curso;
+					System.out.println("Imprimindo o ResultSet:");
+					while (db.resultadosDaQuery().next()) {
+						matricula = Integer.parseInt(db.resultadosDaQuery().getString("matricula"));
+						nome = db.resultadosDaQuery().getString("nome");
+						data = db.resultadosDaQuery().getString("data");
+						curso = db.resultadosDaQuery().getString("curso");
+						System.out.printf("%3d\t%-30s\t%-30s\t%-10s\n", matricula, nome, curso, data);
+					}
+					db.terminaQuery();
+				} catch (Exception e) {
+					e.toString();
+				}
+				db.fecharConexao();
 				break;
 			case 9:
 				System.out.println("\nSaindo do SisBib!");

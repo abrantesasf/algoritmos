@@ -15,12 +15,12 @@ public class VetorDeEmprestimos {
 	}
 
 
-	private int getQtdNoVetor() {
+	public int getQtdNoVetor() {
 		return this.qtdNoVetor;
 	}
 	
 
-	private int getTamanhoDoVetor() {
+	public int getTamanhoDoVetor() {
 		return this.vEmprestimos.length;
 	}
 	

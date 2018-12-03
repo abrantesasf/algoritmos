@@ -10,12 +10,16 @@ import java.io.UnsupportedEncodingException;
 import java.io.BufferedReader;
 //import java.util.Scanner;
 import sisBib.principal.Aluno;
+import sisBib.principal.Emprestimo;
 import sisBib.principal.Funcionario;
+import sisBib.principal.ItemDeEmprestimo;
 import sisBib.principal.Livro;
 import sisBib.principal.Periodico;
 import sisBib.principal.Professor;
 import sisBib.principal.VetorDeAlunos;
+import sisBib.principal.VetorDeEmprestimos;
 import sisBib.principal.VetorDeFuncionarios;
+import sisBib.principal.VetorDeItensDeEmprestimo;
 import sisBib.principal.VetorDeLivros;
 import sisBib.principal.VetorDePeriodicos;
 import sisBib.principal.VetorDeProfessores;
@@ -928,6 +932,304 @@ public class CSV {
 		}
 		return ok;
 	}
+	
+	public boolean lerCSVemprestimos(String arquivo, VetorDeEmprestimos	 vEmprestimos) throws IOException {
+		int    numeroCampos = 5;
+		String divisor      = ";";
+		String linha        = "";
+		boolean ok          = true;
+		VetorDeEmprestimos vTemp = new VetorDeEmprestimos(vEmprestimos.getTamanhoDoVetor());
+
+		try {
+			// Cria objeto FileReader para "apontar" para o arquivo passado como argumento; e
+			// Cria objeto BufferedReader que lÃª o conteÃºdo do arquivo apontado pelo FileReader.
+			FileReader     arq    = new FileReader(arquivo);
+			BufferedReader lerArq = new BufferedReader(arq);
+			
+			try {
+				// Pula a linha de cabeÃ§alho do arquivo
+				lerArq.readLine();
+				
+				// Enquanto ainda existem linhas a serem lidas e nÃ£o hÃ¡ erros (ok = true):
+				while (((linha = lerArq.readLine()) != null) && ok) {
+					
+					// Pega a prÃ³xima linha, divide os campos nos divisores e coloca em vetor
+					String[] vetor = linha.split(divisor);
+					
+					// Valida se o nÃºmero de campos da linha estÃ¡ nos conformes
+					if (vetor.length != numeroCampos) {
+						ok = false;
+						this.mensagem = "Erro de estrutura do arquivo CSV de emprestimos (mais ou menos campos do que o especificado para o SisBib).";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+						
+					// Valida se a matrÃ­cula estÃ¡ nos conformes
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[0]))) {
+						ok = false;
+						this.mensagem = "Erro de código: \"" + vetor[0] + "\" está fora dos limites especificados para o SisBib.";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+						
+					// Valida se a data estÃ¡ nos conformes
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[1]))) {
+						ok = false;
+						this.mensagem = "Erro de código: \"" + vetor[1] + "\" está fora dos limites especificados para o SisBib.";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+					
+					// Valida se jÃ¡ existe algum aluno cadastrado com o mesmo nÃºmero de matrÃ­cula
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[2]))) {
+						ok = false;
+						this.mensagem = "Erro de código: \"" + vetor[2] + "\" está fora dos limites especificados para o SisBib.";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+						
+					// Valida se a multa Ã© menor do que zero
+					} else if(!validacoes.validaData(vetor[3])){
+						ok = false;
+						this.mensagem = "Erro na data: \"" + vetor[3] + "\" não é uma data válida.";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+						
+					} else if(!validacoes.validaData(vetor[4])){
+						ok = false;
+						this.mensagem = "Erro na data: \"" + vetor[4] + "\" não é uma data válida.";
+						this.mensagem += "\nA leitura e importação dos dados NÃO FOI realizada.";
+						break;
+						
+					} else {
+					
+						Emprestimo novoEmprestimo = new Emprestimo(Integer.parseInt(vetor[0]), Integer.parseInt(vetor[1]), Integer.parseInt(vetor[2]), vetor[3], vetor[4]);
+						
+						// Tenta inserir o professor no vetor
+						if (!vTemp.inserirEmprestimo(novoEmprestimo)) {
+							ok = false;
+							this.mensagem = "Erro durante a inserÃ§Ã£o do item no vetor temporÃ¡rio.";
+							this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+							break;
+						}
+					}
+				}
+				
+			} catch (Exception e) {
+				// Se deu algum xabu, mostra o stack de erro
+				e.printStackTrace();	
+			} finally {
+				// Se nÃ£o deu xabu, fecha o FileReader e o BufferedReader
+				lerArq.close();
+				arq.close();
+			}
+		} catch (Exception e2) {
+			// Se deu algum xabu, mosgtra o stack de erro
+			e2.printStackTrace();
+		}
+		
+		// Se chegou atÃ© aqui e ok continua True, entÃ£o podemos tirar os dados do
+		// vetor temporÃ¡rio e passar de volta para o real
+		if (ok)	{
+			for (int i = 0; i < vTemp.getQtdNoVetor(); i++) {
+				if(!vEmprestimos.inserirEmprestimo(vTemp.getEmprestimo(i))) {
+					ok = false;
+					this.mensagem = "Erro DESCONHECIDO durante o retorno dos dados. Entre em contato com o suporte.";
+					this.mensagem += "\nSeus dados podem estar corrompidos. Verifique!";
+					break;
+				} else {
+					this.mensagem = "Nenhum erro encontrado!";
+					this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados foi concluÃ­da com sucesso!";
+				};
+			}
+		}
+		
+		// Anula vetor temporÃ¡rio e retorna True ou False
+		vTemp = null;
+		return ok;
+		
+	}
+	public boolean gravarCSVemprestimos(String arquivo, VetorDeEmprestimos vEmprestimo) {
+		boolean ok = false;
+		try {
+			// Instancia objeto do tipo PrintWriter, usanto UTF-8 por padrÃƒÂ£o
+			PrintWriter saida = new PrintWriter(arquivo, "UTF-8");
+
+			// Grava linha de cabeÃƒÂ§alho e o separador de linha adequado para o SO:
+			saida.print("CodigoItem;MatriculaCliente;MatriculaFuncionario;DataEmprestimo;DataDevolução");
+			saida.print(System.getProperty("line.separator"));
+
+			// Percorre o vetor e salva os dados no arquivo (removendo qualquer ";"
+			// que estiver no meio das informaÃƒÂ§ÃƒÂµes do tipo String), colocando o separador
+			// ";"
+			// entre os campos e, ao final, o caractere de final de linha adequado para o SO
+			for (int i = 0; i < vEmprestimo.getQtdNoVetor(); i++) {
+				saida.print(vEmprestimo.getEmprestimo(i).getCodigo());
+				saida.print(";");
+				saida.print(vEmprestimo.getEmprestimo(i).getMatriculaCliente());
+				saida.print(";");
+				saida.print(vEmprestimo.getEmprestimo(i).getMatriculaFuncionario());
+				saida.print(";");
+				saida.print(vEmprestimo.getEmprestimo(i).getDataEmprestimoString());
+				saida.print(";");
+				saida.print(vEmprestimo.getEmprestimo(i).getDataDevolucao());
+				saida.print(System.getProperty("line.separator"));
+			}
+			ok = true;
+			saida.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	
+	
+	public boolean lerCSVitensDeEmprestimos(String arquivo, VetorDeItensDeEmprestimo vItens) throws IOException {
+		int    numeroCampos = 5;
+		String divisor      = ";";
+		String linha        = "";
+		boolean ok          = true;
+		VetorDeItensDeEmprestimo vTemp = new VetorDeItensDeEmprestimo(vItens.getTamanhoDoVetor());
+
+		try {
+			// Cria objeto FileReader para "apontar" para o arquivo passado como argumento; e
+			// Cria objeto BufferedReader que lÃª o conteÃºdo do arquivo apontado pelo FileReader.
+			FileReader     arq    = new FileReader(arquivo);
+			BufferedReader lerArq = new BufferedReader(arq);
+			
+			try {
+				// Pula a linha de cabeÃ§alho do arquivo
+				lerArq.readLine();
+				
+				// Enquanto ainda existem linhas a serem lidas e nÃ£o hÃ¡ erros (ok = true):
+				while (((linha = lerArq.readLine()) != null) && ok) {
+					
+					// Pega a prÃ³xima linha, divide os campos nos divisores e coloca em vetor
+					String[] vetor = linha.split(divisor);
+					
+					// Valida se o nÃºmero de campos da linha estÃ¡ nos conformes
+					if (vetor.length != numeroCampos) {
+						ok = false;
+						this.mensagem = "Erro de estrutura do arquivo CSV de Itens de emprestimos (mais ou menos campos do que o especificado para o SisBib).";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+						
+					// Valida se a matrÃ­cula estÃ¡ nos conformes
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[0]))) {
+						ok = false;
+						this.mensagem = "Erro de cÃ³digo: \"" + vetor[0] + "\" estÃ¡ fora dos limites especificados para o SisBib.";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+						
+					// Valida se a data estÃ¡ nos conformes
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[1]))) {
+						ok = false;
+						this.mensagem = "Erro de código: \"" + vetor[1] + "\" nÃ£o Ã© um ano vÃ¡lido.";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+					
+					// Valida se jÃ¡ existe algum aluno cadastrado com o mesmo nÃºmero de matrÃ­cula
+					} else if (!this.validacoes.validaCodigo(Integer.parseInt(vetor[2]))) {
+						ok = false;
+						this.mensagem = "Erro de matrÃ­cula duplicada: \"" + vetor[2] + "\" jÃ¡ estÃ¡ cadastrada.";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+						
+					// Valida se a multa Ã© menor do que zero
+					} else if (!validacoes.validaCodigo(Integer.parseInt(vetor[3]))) {
+						ok = false;
+						this.mensagem = "Erro no tipo: \"" + vetor[3] + "\" nÃ£o Ã© um tipo vÃ¡lido.";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+						
+					// Se tudo estiver nos conformes, cria novo professor
+					} else if(!validacoes.validaData(vetor[4])){
+						ok = false;
+						this.mensagem = "Erro no tipo: \"" + vetor[3] + "\" nÃ£o Ã© um tipo vÃ¡lido.";
+						this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+						break;
+						
+					} else {
+					
+						ItemDeEmprestimo novoItem = new ItemDeEmprestimo(Integer.parseInt(vetor[0]), Integer.parseInt(vetor[1]), Integer.parseInt(vetor[2]), Integer.parseInt(vetor[3]), vetor[4]);
+						
+						// Tenta inserir o professor no vetor
+						if (!vTemp.inserirItemDeEmprestimo(novoItem)) {
+							ok = false;
+							this.mensagem = "Erro durante a inserÃ§Ã£o do item no vetor temporÃ¡rio.";
+							this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados NÃƒO FOI realizada.";
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				// Se deu algum xabu, mostra o stack de erro
+				e.printStackTrace();	
+			} finally {
+				// Se nÃ£o deu xabu, fecha o FileReader e o BufferedReader
+				lerArq.close();
+				arq.close();
+			}
+		} catch (Exception e2) {
+			// Se deu algum xabu, mosgtra o stack de erro
+			e2.printStackTrace();
+		}
+		
+		// Se chegou atÃ© aqui e ok continua True, entÃ£o podemos tirar os dados do
+		// vetor temporÃ¡rio e passar de volta para o real
+		if (ok)	{
+			for (int i = 0; i < vTemp.getQtdNoVetor(); i++) {
+				if(!vItens.inserirItemDeEmprestimo(vTemp.getItemDeEmprestimo(i))) {
+					ok = false;
+					this.mensagem = "Erro DESCONHECIDO durante o retorno dos dados. Entre em contato com o suporte.";
+					this.mensagem += "\nSeus dados podem estar corrompidos. Verifique!";
+					break;
+				} else {
+					this.mensagem = "Nenhum erro encontrado!";
+					this.mensagem += "\nA leitura e importaÃ§Ã£o dos dados foi concluÃ­da com sucesso!";
+				};
+			}
+		}
+		
+		// Anula vetor temporÃ¡rio e retorna True ou False
+		vTemp = null;
+		return ok;
+		
+	}
+	public boolean gravarCSVitensDeEmprestimos(String arquivo, VetorDeItensDeEmprestimo vItens) {
+		boolean ok = false;
+		try {
+			// Instancia objeto do tipo PrintWriter, usanto UTF-8 por padrÃƒÂ£o
+			PrintWriter saida = new PrintWriter(arquivo, "UTF-8");
+
+			// Grava linha de cabeÃƒÂ§alho e o separador de linha adequado para o SO:
+			saida.print("CodigoItem;CodigoEmprestimo;CodigoLivro;CodigoPeriodico;DataDevolução");
+			saida.print(System.getProperty("line.separator"));
+
+			// Percorre o vetor e salva os dados no arquivo (removendo qualquer ";"
+			// que estiver no meio das informaÃƒÂ§ÃƒÂµes do tipo String), colocando o separador
+			// ";"
+			// entre os campos e, ao final, o caractere de final de linha adequado para o SO
+			for (int i = 0; i < vItens.getQtdNoVetor(); i++) {
+				saida.print(vItens.getItemDeEmprestimo(i).getCodigoItem());
+				saida.print(";");
+				saida.print(vItens.getItemDeEmprestimo(i).getCodigoEmprestimo());
+				saida.print(";");
+				saida.print(vItens.getItemDeEmprestimo(i).getCodigoLivro());
+				saida.print(";");
+				saida.print(vItens.getItemDeEmprestimo(i).getCodigoPeriodico());
+				saida.print(";");
+				saida.print(vItens.getItemDeEmprestimo(i).getDataDevolucao());
+				saida.print(System.getProperty("line.separator"));
+			}
+			ok = true;
+			saida.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	
 	
 	public String getMensagem() {
 		return this.mensagem;
