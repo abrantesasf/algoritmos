@@ -10,8 +10,8 @@ public class VetorDeItensDeEmprestimo {
 		this.qtdNoVetor = 0;
 	}
 
-	public ItemEmprestimo getEmprestimo(int i) {
-		return this.vEmprestimos[i];
+	public ItemDeEmprestimo getItemDeEmprestimo(int i) {
+		return this.vItens[i];
 	}
 
 
@@ -21,15 +21,13 @@ public class VetorDeItensDeEmprestimo {
 	
 
 	private int getTamanhoDoVetor() {
-		return this.vEmprestimos.length;
+		return this.vItens.length;
 	}
-	
-	
 
 	public boolean codigoExiste(int codigo) {
 		boolean resposta = false;
 		for (int i = 0; i < this.qtdNoVetor; i++) {
-			if (this.vEmprestimos[i].getCodigo() == codigo) {
+			if (this.vItens[i].getCodigoItem() == codigo) {
 				resposta = true;
 				break;
 			}
@@ -41,7 +39,7 @@ public class VetorDeItensDeEmprestimo {
 	public int posicaoNoVetor(int codigo) {
 		int resposta = -1;
 		for (int i = 0; i < this.qtdNoVetor; i++) {
-			if (this.vEmprestimos[i].getCodigo() == codigo) {
+			if (this.vItens[i].getCodigoItem() == codigo) {
 				resposta = i;
 			}
 		}
@@ -69,21 +67,21 @@ public class VetorDeItensDeEmprestimo {
 	public String toString() {
 		String resposta = "";
 		for (int i = 0; i < this.qtdNoVetor; i++) {
-			resposta += this.vEmprestimos[i].toString();
+			resposta += this.vItens[i].toString();
 		}
 		return resposta;
 	}
 	
 	
     	
-	public boolean inserirEmprestimo(ItemEmprestimo novoEmprestimo) {
+	public boolean inserirItemDeEmprestimo(ItemDeEmprestimo novoItemDeEmprestimo) {
 		boolean resposta = false;
 		if (this.vetorCheio()) {
 			resposta = false;
-		} else if (this.codigoExiste(novoEmprestimo.getCodigo())) {
+		} else if (this.codigoExiste(novoItemDeEmprestimo.getCodigoItem())) {
 			resposta = false;
 		} else {
-			this.vEmprestimos[this.qtdNoVetor] = novoEmprestimo;
+			this.vItens[this.qtdNoVetor] = novoItemDeEmprestimo;
 			this.qtdNoVetor++;
 			resposta = true;
 		}
@@ -98,7 +96,7 @@ public class VetorDeItensDeEmprestimo {
 		} else if (i > this.qtdNoVetor) {
 			
 		} else {
-			this.vEmprestimos[i] = this.vEmprestimos[this.qtdNoVetor - 1];
+			this.vItens[i] = this.vItens[this.qtdNoVetor - 1];
 			this.qtdNoVetor -= 1;
 			resposta = true;
 		}
