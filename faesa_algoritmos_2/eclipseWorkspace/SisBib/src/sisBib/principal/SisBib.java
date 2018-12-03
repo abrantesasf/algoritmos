@@ -3,6 +3,9 @@ package sisBib.principal;
 // Importação de bibliotecas
 import java.io.IOException;
 import java.util.Scanner;
+
+import org.hibernate.boot.model.source.internal.hbm.ManyToOneAttributeColumnsAndFormulasSource;
+
 import sisBib.db.*;
 import sisBib.principal.*;
 import sisBib.util.*;
@@ -45,6 +48,7 @@ public class SisBib {
 	private static String             csvProfessores  = "/home/abrantesasf/professores.csv";
 	private static String             csvLivros       = "/home/abrantesasf/livros.csv";
 	private static String             csvPeriodicos   = "/home/abrantesasf/periodicos.csv";
+	private static int                matFunc;
 	
 
 	/**
@@ -80,6 +84,7 @@ public class SisBib {
 				login = scan.nextLine();
 				if (funcionarios.procuraLogin(login)) {
 					conta = true;
+					matFunc = funcionarios.buscaMatriculaPorLogin(login); 
 					System.out.println("Digite sua senha: ");
 					senha = scan.nextLine();
 					if (funcionarios.procuraSenha(senha)) {
@@ -163,7 +168,7 @@ public class SisBib {
 		do {
 			System.out.println("--------------- MENU DE OPÇÕES ---------------\n" +
 		                       "1 - Cadastrar usuários ou itens\n" +
-					           //"2 - Cadastrar empréstimos\n" +
+					           "2 - Cadastrar empréstimos\n" +
 		                       //"3 - Devolução de empréstimos\n" +
 					           "4 - Remover cadastro de usuários ou itens\n" +
 		                       "5 - Ver cadastros na tela\n" +

@@ -84,6 +84,16 @@ public class VetorDeFuncionarios {
 		}
 		return resposta;
 	}
+	
+	public int buscaMatriculaPorLogin(String login) {
+		int resposta = -1;
+		for (int i = 0; i < this.qtdNoVetor; i++) {
+			if (this.vFuncionario[i].getLogin().equalsIgnoreCase(login)) {
+				resposta = this.vFuncionario[i].getMatricula();
+			}
+		}
+		return resposta;
+	}
 
 	public int posicaoNoVetor(int matricula) {
 		int resposta = -1;
