@@ -15,7 +15,7 @@ import sisBib.util.Config;
  * <li>O método de conexão que estabelecimos EXIGE um usuário e senha com permissão de acesso ao banco
  * de dados e aos objetos do banco de dados. Se esse usuário não existir ou não tiver
  * acesso aos objetos do banco de dados, o programa irá falhar.</li>
- * <li>Conexões SSL não foram implementadas, ainda, nesta classe.</li>
+ * <li>Conexões SSL foram implementadas utilizando JDBC.</li>
  * </ul>
  * 
  * <p>Sistema de Biblioteca (SisBib): trabalho desenvolvido na disciplina 
@@ -24,7 +24,7 @@ import sisBib.util.Config;
  * @author Abrantes Araújo Silva Filho (<a href="mailto:abrantesasf@gmail.com">abrantesasf@gmail.com</a>)
  * @author Isaac de Miranda Campos (<a href="mailto:isaac.miranda321@gmail.com">isaac.miranda321@gmail.com</a>)
  * @version 1.0
- * @since   2018-11-13
+ * @since   2018-12-03
  */
 public class PostgreSQL {
 	
@@ -33,7 +33,7 @@ public class PostgreSQL {
 	///////////////////////////////////////////////////
 	
 	/**
-	 * <p><b>dbLibPath, dbDriver, dbUrl, dbSSL, dbSSLmode, dbSSLfactory, dbUser, dbPassword, dbSSLcert,
+	 * <p><b>dbLibPath</b></p>, dbDriver, dbUrl, dbSSL, dbSSLmode, dbSSLfactory, dbUser, dbPassword, dbSSLcert,
 	 * dbSSLkey, dbSSLca, dbLingua, dbPais</b>:</p>
 	 * <ul>
 	 * <li>Variáveis que armazenam configurações relativas ao banco de dados,
