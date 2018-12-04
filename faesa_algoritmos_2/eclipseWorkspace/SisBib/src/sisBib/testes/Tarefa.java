@@ -2,29 +2,29 @@ package sisBib.testes;
 
 import java.util.Calendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
+//import javax.persistence.Temporal;
+//import javax.persistence.TemporalType;
 
 
-@Entity
-@Table(name="tarefas")
+//@Entity
+//@Table(name="tarefas")
 public class Tarefa {
 	
-	@Id
-	@GeneratedValue
-	@Column(name="id")
+//	@Id
+//	@GeneratedValue
+//	@Column(name="id")
 	private Long id;
 	
 	private String descricao;
 	private boolean finalizado;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name="data")
+//	@Temporal(TemporalType.DATE)
+//	@Column(name="data")
 	private Calendar dataFinalizacao;
 	
 	public Long getId() {

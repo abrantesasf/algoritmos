@@ -3,9 +3,6 @@ package sisBib.principal;
 // Importação de bibliotecas
 import java.io.IOException;
 import java.util.Scanner;
-
-import org.hibernate.boot.model.source.internal.hbm.ManyToOneAttributeColumnsAndFormulasSource;
-
 import sisBib.db.*;
 import sisBib.principal.*;
 import sisBib.util.*;
@@ -66,6 +63,14 @@ public class SisBib {
 		// Abre conexão remota ao PostgreSQL para uso demonstrativo
 		System.out.println("O programa está sendo carregado, por favor aguarde...\n");
 		db.abrirConexao("sisbib", "12345");
+		if (db.conexaoExiste()) {
+			// ok, continua
+		} else {
+			System.out.println("");
+			System.out.println("ERRO: como não foi possível conectar ao banco de dados, o programa não será iniciado.");
+			System.out.println("Por favor, verifique sua conexão com a internet.");
+			return;
+		}
 		
 		///////////////////////////////////////////////////
 		// Lê planilha de funcionários e mostra login:
