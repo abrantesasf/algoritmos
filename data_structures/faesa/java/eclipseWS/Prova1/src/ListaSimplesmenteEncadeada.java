@@ -81,13 +81,11 @@ public class ListaSimplesmenteEncadeada {
 			setPrim(novoNo);
 			setUlt(novoNo);
 			retorno = true;
+			setQtdNos( getQtdNos() + 1 );
 		} else {
 			novoNo.setProx(getPrim());
 			setPrim(novoNo);
 			retorno = true;
-		}
-		
-		if ( retorno ) {
 			setQtdNos( getQtdNos() + 1 );
 		}
 		
@@ -104,16 +102,15 @@ public class ListaSimplesmenteEncadeada {
 		if ( eVazia() ) {
 			setPrim(novoNo);
 			setUlt(novoNo);
+			setQtdNos( getQtdNos() + 1 );
 			retorno = true;
 		} else {
 			ult.setProx(novoNo);
 			setUlt(novoNo);
+			setQtdNos( getQtdNos() + 1 );
 			retorno = true;
 		}
 		
-		if (retorno) {
-			setQtdNos( getQtdNos() + 1 );
-		}
 		return retorno;
 	}
 	
@@ -263,7 +260,93 @@ public class ListaSimplesmenteEncadeada {
 		}
 		
 		return retorno;
-	}	
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	// inserirAposKesimo
+	/////////////////////////////////////////////////////////////////
+	public boolean inserirAposKesimo(No novoNo, int k) {
+		boolean retorno = false;
+		
+		if ( ! eVazia() ) {
+			No  anterior = null;
+			No  atual    = getPrim();
+			int contador = 1;
+			
+			while ( contador < k ) {
+				anterior = atual;
+				atual = atual.getProx();
+				contador++;
+			}
+			
+			if ( atual == getPrim() ) {
+				if ( atual.getProx() == null ) {
+					atual.setProx(novoNo);
+					setUlt(novoNo);
+					setQtdNos( getQtdNos() + 1);
+					retorno = true;
+				} else {
+					novoNo.setProx(atual.getProx());
+					atual.setProx(novoNo);
+					setQtdNos( getQtdNos() + 1);
+					retorno = true;
+				}
+			} else if ( atual == getUlt() ) {
+				atual.setProx(novoNo);
+				setUlt(novoNo);
+				setQtdNos( getQtdNos() + 1);
+				retorno = true;
+			} else {
+				novoNo.setProx(atual.getProx());
+				atual.setProx(novoNo);
+				setQtdNos( getQtdNos() + 1);
+				retorno = true;
+			}
+			
+		}
+		
+		return retorno;
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	// inserirAposKesimo
+	/////////////////////////////////////////////////////////////////
+	public boolean inserirAntesKesimo(No novoNo, int k) {
+		boolean retorno = false;
+		
+		if ( ! eVazia() ) {
+			No  anterior = null;
+			No  atual    = getPrim();
+			int contador = 1;
+			
+			while (contador < k) {
+				anterior = atual;
+				atual    = atual.getProx();
+				contador++;
+			}
+			
+			if ( atual == getPrim() ) {
+				if ( inserirNoInicio(novoNo) ) {
+					return true;
+				}
+			} else if ( atual == getUlt() ) {
+				novoNo.setProx(getUlt());
+				anterior.setProx(novoNo);
+				setQtdNos(getQtdNos()+1);
+				retorno = true;
+			} else {
+				novoNo.setProx(atual);
+				anterior.setProx(novoNo);
+				setQtdNos(getQtdNos()+1);
+				retorno = true;
+			}
+			
+		}
+		
+		return retorno;
+	}
 	
 	
 	/////////////////////////////////////////////////////////////////

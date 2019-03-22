@@ -18,6 +18,7 @@ public class TestaLSE {
                                "23. Inserir após um determinado nó pela chave\n" +
 			                   "24. Inserir antes de um determinado nó pela chave\n" +
                                "25. Inserir após o k-ésimo nó\n" +
+			                   "26. Inserir antes do k-ésimo nó\n" +
                                "\n" +
 			                   "30. Remover o primeiro\n" +
                                "31. Remover o último\n" +
@@ -62,6 +63,10 @@ public class TestaLSE {
 				
 			case 25:
 				inserirAposKesimo();
+				break;
+				
+			case 26:
+				inserirAntesKesimo();
 				break;
 				
 			case 30:
@@ -233,7 +238,60 @@ public class TestaLSE {
 	// 25. Inserir após k-ésimo
 	/////////////////////////////////////////////////////////////////
 	public static void inserirAposKesimo() {
-		// TODO: implementar
+		int k;
+		int chave;
+		
+		System.out.println("Digite a chave que deseja inserir: ");
+		chave = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("Digite o k-ésimo nó: ");
+		k = scan.nextInt();
+		scan.nextLine();
+		
+		if ( lista1.eVazia() ) {
+			System.out.println("\nLista vazia, não é possível inserir após k-ésimo.");
+		} else if (k > lista1.getQtdNos()) {
+			System.out.println("O k-ésimo informado é maior do que a quantidade de elementos na lista.");
+		} else {
+			Item novoItem = new Item(chave);
+			No   novoNo   = new No(novoItem);
+			
+			if (lista1.inserirAposKesimo(novoNo, k) ) {
+				System.out.println("A chave " + chave + " foi inserida após o " + k + "º nó.");
+			}
+		}
+		
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	// 26. Inserir antes do k-ésimo
+	/////////////////////////////////////////////////////////////////
+	public static void inserirAntesKesimo() {
+		int k;
+		int chave;
+		
+		System.out.println("Digite a chave que deseja inserir: ");
+		chave = scan.nextInt();
+		scan.nextLine();
+		
+		System.out.println("Digite o k-ésimo nó: ");
+		k = scan.nextInt();
+		scan.nextLine();
+		
+		if ( lista1.eVazia() ) {
+			System.out.println("\nLista vazia, não é possível inserir antes do k-ésimo.");
+		} else if (k > lista1.getQtdNos()) {
+			System.out.println("O k-ésimo informado é maior do que a quantidade de elementos na lista.");
+		} else {
+			Item novoItem = new Item(chave);
+			No   novoNo   = new No(novoItem);
+			
+			if (lista1.inserirAntesKesimo(novoNo, k) ) {
+				System.out.println("A chave " + chave + " foi inserida antes do " + k + "º nó.");
+			}
+		}
 	}
 	
 	
