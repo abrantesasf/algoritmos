@@ -3,3 +3,6 @@
 *.log
 *.out
 *.toc
+
+# ignora o diretório do ambiente virtual para o Python no 6.006:
+6.006/venv/
