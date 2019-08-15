@@ -1,2 +1,9 @@
+# Ignora o ambiente virtual e o cache, criados e utilizados pelo PyCharm:
 venv/
 __pycache__/
+
+# Ignora os bytecodes compilados de módulos importados:
+*.pyc
+
+# Ignora o arquivo de trace utilizado pelo visualizador HTML de algoritmos:
+trace.jsonp
